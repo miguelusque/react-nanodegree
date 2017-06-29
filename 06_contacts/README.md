@@ -1,7 +1,7 @@
 # Building a contacts list with React
 This repository contains the 'contacts' project of the Udacity's [React NanoDegree](https://www.udacity.com/course/react-nanodegree--nd019).
 
-![Contats cover](https://raw.githubusercontent.com/miguelangel/artificial-intelligence--sudoku/master/cover.jpg)
+![Contats cover](https://github.com/miguelangel/react-nanodegree--contacts/blob/master/cover.png)
 
 
 ## Available Scripts
