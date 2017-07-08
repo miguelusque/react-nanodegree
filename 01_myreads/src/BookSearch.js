@@ -19,7 +19,7 @@ class BookSearch extends Component {
 
     if (query.trim()) {
       BooksAPI.search(query.trim(), this.props.maxResults).then((results) => {
-        this.setState({results})
+        console.log(this.state.results)
       })
     } else {
       this.setState({results:[]})
