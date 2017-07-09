@@ -8,10 +8,6 @@ class ListBooks extends Component {
     onChange: PropTypes.func.isRequired
   }
 
-  state = {
-    books:[]
-  }
-
 	render() {
 		return (
       <div className="list-books">
@@ -22,19 +18,19 @@ class ListBooks extends Component {
           <div>
             <Bookshelf 
               title="Currently Reading"
-              books={this.props.books.filter((book) => book.shelf === 'currentlyReading')}
+              books={this.props.books.filter((book) => book.shelf === "currentlyReading")}
               onChange={this.props.onChange}
             />
             <Bookshelf
               title="Want to Read"
-              books={this.props.books.filter((book) => book.shelf === 'wantToRead')}
+              books={this.props.books.filter((book) => book.shelf === "wantToRead")}
               onChange={this.props.onChange}
             />
             <Bookshelf
               title="Read"
-              books={this.props.books.filter((book) => book.shelf === 'read')}
+              books={this.props.books.filter((book) => book.shelf === "read")}
               onChange={this.props.onChange}
-            />
+            />∫
           </div>
         </div>
       </div>

@@ -7,12 +7,13 @@ import * as BooksAPI from './BooksAPI'
 
 class BookSearch extends Component {
   static propTypes = {
+    books: PropTypes.array.isRequired,
     maxResults: PropTypes.number.isRequired,
     onChange: PropTypes.func.isRequired 
   }
 
   state = {
-    query: '',
+    query: "",
     results: []
   }
 
@@ -22,9 +23,18 @@ class BookSearch extends Component {
     if (query.trim()) {
       BooksAPI.search(query.trim(), this.props.maxResults).then((results) => {
         if ("undefined" === typeof results.error) {
+          // Update results book shelf based on user books
+          for (let result of results) {
+            result.shelf ="moveTo"
+            for (let book of this.props.books) {
+              if (result.id === book.id) {
+                result.shelf = book.shelf
+              }
+            }
+          }
+
           this.setState({results:results})
-        }
-        else {
+        } else {
           this.setState({results:[]})
         }
       })
@@ -35,11 +45,12 @@ class BookSearch extends Component {
 
 	render() {
     const {query, results} = this.state
+    let prefix = Math.random()
 
 		return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link className='close-search' to='/'>Close</Link>
+          <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
             <input
               type="text"
@@ -50,9 +61,9 @@ class BookSearch extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid">
-            { results.map((book, index) => (
-              <li key={index}>
+          <ol className="books-grid">         
+            {results.map((book, index) => (
+              <li key={prefix + index}>
                 <Book value={book} onChange={this.props.onChange} />
               </li>
             ))}
