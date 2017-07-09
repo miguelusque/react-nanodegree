@@ -9,6 +9,8 @@ class ListBooks extends Component {
   }
 
 	render() {
+    const shelves = {currentlyReading: 'Currently Reading', wantToRead: 'Want to Read', read: 'Read' }
+
 		return (
       <div className="list-books">
         <div className="list-books-title">
@@ -16,21 +18,13 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Bookshelf 
-              title="Currently Reading"
-              books={this.props.books.filter((book) => book.shelf === "currentlyReading")}
-              onChange={this.props.onChange}
-            />
-            <Bookshelf
-              title="Want to Read"
-              books={this.props.books.filter((book) => book.shelf === "wantToRead")}
-              onChange={this.props.onChange}
-            />
-            <Bookshelf
-              title="Read"
-              books={this.props.books.filter((book) => book.shelf === "read")}
-              onChange={this.props.onChange}
-            />∫
+            { Object.keys(shelves).map((key) => ( 
+                <Bookshelf
+                  title={shelves[key]}
+                  books={this.props.books.filter((book) => book.shelf === key)}
+                  onChange={this.props.onChange} 
+              />))
+            }
           </div>
         </div>
       </div>
