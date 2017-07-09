@@ -6,7 +6,7 @@ This repository contains the 'My reads' project of the Udacity's [React Nanodegr
 
 ## Synopsis
 
-In this project, students will develop a bookshelf application.
+In this project the student will develop a bookshelf application.
 
 This app will let tracking the books that the user:
 - is currently reading,
