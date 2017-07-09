@@ -11,16 +11,10 @@ class Book extends Component {
 		const {value, onChange} = this.props
 
         // Some results do not have an image thumbnail
-        let backgroundImage
-        if ("undefined" !== typeof value.imageLinks) {
-        	backgroundImage = value.imageLinks.thumbnail
-        } 
+        const backgroundImage = value.imageLinks ? value.imageLinks.thumbnail : ""
 
         // Some results do not have an author
-        let authors
-        if ("undefined" !== typeof value.authors) {
-        	authors = value.authors.join('; ')
-        }
+        const authors = value.authors ? value.authors.join(", ") : "";
 
 		return(
 	        <div className="book">

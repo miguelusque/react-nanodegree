@@ -45,7 +45,6 @@ class BookSearch extends Component {
 
 	render() {
     const {query, results} = this.state
-    let prefix = Math.random()
 
 		return (
       <div className="search-books">
@@ -62,8 +61,8 @@ class BookSearch extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">         
-            {results.map((book, index) => (
-              <li key={prefix + index}>
+            { results.map((book, index) => (
+              <li key={index}>
                 <Book value={book} onChange={this.props.onChange} />
               </li>
             ))}

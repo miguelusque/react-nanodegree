@@ -11,7 +11,6 @@ class Bookshelf extends Component {
 	}
 
 	render() {
-		let prefix = Math.random()
 		return(
 			<div className="bookshelf">
 	          <h2 className="bookshelf-title">{this.props.title}</h2>
@@ -19,7 +18,7 @@ class Bookshelf extends Component {
 	            <ol className="books-grid">
 	              { 
 	              	this.props.books.map((book, index) => (
-	                <li key={prefix + index}>
+	                <li key={index}>
 	                  <Book value={book} onChange={this.props.onChange} />
 	                </li>
 	              ))}
