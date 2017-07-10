@@ -18,11 +18,12 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            { Object.keys(shelves).map((key) => ( 
+            { Object.keys(shelves).map((key) => (
                 <Bookshelf
+                  key={key}
                   title={shelves[key]}
                   books={this.props.books.filter((book) => book.shelf === key)}
-                  onChange={this.props.onChange} 
+                  onChange={this.props.onChange}
               />))
             }
           </div>
