@@ -10,8 +10,8 @@ export function addRecipe({day, recipe, meal}) {
 	}
 }
 
-export function removeFrom Calendar({day, meal}) {
-	retun {
+export function removeFromCalendar({day, meal}) {
+	return {
 		type: REMOVE_FROM_CALENDAR
 	}
 }
