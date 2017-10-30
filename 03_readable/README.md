@@ -15,6 +15,7 @@ To get started developing right away:
 * In another terminal window, use Create React App to scaffold out the front-end
     - `create-react-app frontend`
     - `cd frontend`
+    - `npm install`
     - `npm start`
 
 ## API Server
