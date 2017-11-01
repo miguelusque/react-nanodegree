@@ -12,6 +12,7 @@
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
+    "jshint": "^2.9.5",
     "react-scripts": "1.0.7"
   },
   "scripts": {
