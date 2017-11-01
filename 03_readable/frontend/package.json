@@ -9,6 +9,7 @@
     "redux": "^3.7.2"
   },
   "devDependencies": {
+    "jshint": "^2.9.5",
     "react-scripts": "1.0.14"
   },
   "scripts": {
