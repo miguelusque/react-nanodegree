@@ -5,11 +5,12 @@ import './css/Posts.css';
 
 class Posts extends Component {
   static propTypes = {
-    posts: PropTypes.array.isRequired
+    posts: PropTypes.array.isRequired,
+    displayFullContent: PropTypes.bool
   }
 
   render() {
-    let {posts} = this.props;
+    let {posts, displayFullContent} = this.props;
 
     if (!posts) {
       posts = [];
@@ -23,14 +24,19 @@ class Posts extends Component {
       <div className='postsContainer'>
         <h3 className='postsHeader'>Posts</h3>
           {posts.map((post) => (
-            <div className='postContainer' key={post.id}>
-              <div className='postTitle'>{post.title}</div>
-              <div className='postBody'>{post.body}</div>
-              <div className='postDate'>Published: {timestampToString(post.timestamp)}</div>
-              <div className='postAuthor'>Author: {post.author}</div>
-              <div className='postCategory'>Category: {post.category}</div>
-              <div className='postScore'>Score: {post.voteScore}</div>
-            </div>
+            displayFullContent === true ?
+              <div className='postContainer' key={post.id}>
+                <div className='postTitle'>{post.title}</div>
+                <div className='postBody'>{post.body}</div>
+                <div className='postDate'>Published: {timestampToString(post.timestamp)}</div>
+                <div className='postAuthor'>Author: {post.author}</div>
+                <div className='postCategory'>Category: {post.category}</div>
+                <div className='postScore'>Score: {post.voteScore}</div>
+              </div>
+              :
+              <div className='postContainer' key={post.id}>
+                <div className='postTitle'>{post.title}</div>
+              </div>
           ))}
       </div>
     )
