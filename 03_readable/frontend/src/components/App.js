@@ -36,6 +36,7 @@ class App extends Component {
           <h1 className='pageTitle'>Readable</h1>
         </header>
         <Categories categories={categories}/>
+        <PostsSortByPicker/>
         <Posts posts={posts}/>
       </div>
     );
