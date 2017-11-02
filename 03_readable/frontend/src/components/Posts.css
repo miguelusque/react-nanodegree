@@ -1,4 +1,5 @@
 .postsContainer {
+  clear: left;
   margin-left: 15px;
   padding: 0px;
 }
@@ -9,7 +10,7 @@
 }
 
 .postContainer {
-  margin-left: 15px;  
+  margin-left: 15px;
   margin-bottom: 15px;
 }
 
