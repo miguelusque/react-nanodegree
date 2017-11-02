@@ -1,0 +1,28 @@
+.postsContainer {
+  margin-left: 15px;
+  padding: 0px;
+}
+
+.postsHeader {
+  font-size: 26px;
+  margin: 0px;
+}
+
+.postContainer {
+  margin-left: 15px;  
+  margin-bottom: 15px;
+}
+
+.postTitle {
+  font-size: 24px;
+}
+
+.postBody {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.postDate, .postAuthor, .postCategory, .postScore {
+  font-size:12px;
+  color: grey;
+}
