@@ -1,17 +1,16 @@
-export const ADD_RECIPE = 'ADD_RECIPE';
-export const REMOVE_FROM_CALENDAR = 'REMOVE_FROM_CALENDAR';
+export const FILTER_POSTS_BY_CATEGORY = 'FILTER_POSTS_BY_CATEGORY';
+export const SORT_POSTS_BY = 'SORT_POSTS_BY';
 
-export function addRecipe({day, recipe, meal}) {
+export function filterPostsByCategory(category) {
 	return {
-		type: ADD_RECIPE,
-		recipe,
-		day,
-		meal
+		type: FILTER_POSTS_BY_CATEGORY,
+		category
 	}
 }
 
-export function removeFromCalendar({day, meal}) {
+export function sortPostsBy(field) {
 	return {
-		type: REMOVE_FROM_CALENDAR
+		type: SORT_POSTS_BY,
+		field
 	}
 }
