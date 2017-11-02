@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import * as ReadableAPI from '../utils/api';
 import Posts from './Posts';
 import Categories from './Categories';
-import {SORT_BY, PostsSortByPicker} from './PostsSortByPicker';
-
+import {SORT_BY, SortPostsBy} from './SortPostsBy';
 
 import './App.css';
 
@@ -36,7 +35,7 @@ class App extends Component {
           <h1 className='pageTitle'>Readable</h1>
         </header>
         <Categories categories={categories}/>
-        <PostsSortByPicker/>
+        <SortPostsBy/>
         <Posts posts={posts}/>
       </div>
     );
