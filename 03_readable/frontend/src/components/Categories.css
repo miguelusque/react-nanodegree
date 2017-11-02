@@ -1,7 +1,5 @@
 .categoriesContainer {
   margin-left: 15px;
-  margin-bottom: 15px;  
-  padding: 0px;
 }
 
 .categoriesHeader {
@@ -9,7 +7,15 @@
   margin: 0px;
 }
 
+.categoryNames {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
 .categoryName {
   font-size: 24px;
-  margin-left: 15px;    
+  margin-left: 15px;
+  margin-bottom: 15px;
+  float: left;
 }
