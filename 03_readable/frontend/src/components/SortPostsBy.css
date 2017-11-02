@@ -19,4 +19,6 @@
   margin-left: 15px;
   margin-bottom: 15px;
   float: left;
+  cursor: pointer;
+  border-bottom:1px solid;
 }
