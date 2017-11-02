@@ -1,0 +1,22 @@
+.sortPostsByContainer {
+  clear: left;
+  margin-left: 15px;
+}
+
+.sortPostsByHeader {
+  font-size: 26px;
+  margin: 0px;
+}
+
+.sortPostsByFields {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+.sortPostsByField {
+  font-size: 24px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  float: left;
+}
