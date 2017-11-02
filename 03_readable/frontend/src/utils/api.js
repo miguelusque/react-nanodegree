@@ -1,11 +1,22 @@
-// TODO: Eliminar
-const API_ID = process.env.REACT_APP_API_ID
-const APP_KEY = process.env.REACT_APP_APP_KEY
+const SERVER = process.env.REACT_APP_READABLE_API_URL || 'http://localhost:3001';
+const HEADERS = { headers: { 'Authorization': 'Lorem ipsum' } };
 
-export function fetchRecipes (food = '') {
-    food = food.trim()
+// This method retrieves the list of posts (by category if not empty).
+export const fetchPosts = (category = '') => {
+  const url = category === '' ? 
+    `${SERVER}/posts` : 
+    `${SERVER}/:${category}/posts`;
+
+  return fetch(url, HEADERS)
+    .then(res => (res.ok ? res.json() : []))
+    .catch(() => []);
+}
+
+// This method retrieved the list of categories.
+export const fetchCategories = () => {
+  const url = `${SERVER}/categories`;
   
-    return fetch(`https://api.edamam.com/search?q=${food}&app_id=${API_ID}&app_key=${APP_KEY}`)
-      .then((res) => res.json())
-      .then(({ hits }) => hits.map(({ recipe }) => recipe))
-  }
+  return fetch(url, HEADERS)
+    .then(res => (res.ok ? res.json() : []))
+    .catch(() => []);
+}
