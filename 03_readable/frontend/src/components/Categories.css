@@ -1,0 +1,14 @@
+.categoriesContainer {
+  margin-left: 15px;
+  padding: 0px;
+}
+
+.categoriesHeader {
+  font-size: 26px;
+  margin: 0px;
+}
+
+.categoryName {
+  font-size: 24px;
+  margin-left: 15px;    
+}
