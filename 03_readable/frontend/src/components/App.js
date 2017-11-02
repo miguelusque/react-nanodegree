@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import * as ReadableAPI from '../utils/api';
-import Posts from './Posts';
-import Categories from './Categories';
-import {SORT_BY, SortPostsBy} from './SortPostsBy';
+import PostsView from './PostsView'
 
-import './App.css';
+import './css/App.css';
 
-class App extends Component {  
+class App extends Component {
   state = {
-    categories: [],
     posts: [],
-    sortBy: SORT_BY.voteScore
-  }
+    categories: []
+  };
 
   componentDidMount() {
-
     ReadableAPI.fetchPosts().then((posts) => {
       this.setState({posts:posts});
     });
@@ -27,16 +22,14 @@ class App extends Component {
   }
 
   render() {
-    const { categories, posts } = this.state;
+    const { posts, categories } = this.state;
 
     return (
       <div className='pageContainer'>
         <header>
           <h1 className='pageTitle'>Readable</h1>
         </header>
-        <Categories categories={categories}/>
-        <SortPostsBy/>
-        <Posts posts={posts}/>
+        <PostsView posts={posts} categories={categories}/>
       </div>
     );
   }
