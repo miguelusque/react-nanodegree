@@ -1,21 +1,15 @@
 import React from 'react'
-import './SortPostsBy.css';
+import { SORT_BY } from '../actions/index'
+import './css/SortPostsBy.css';
 
-const SORT_BY = {voteScore: 'voteScore', timestampp: 'timestampp'};
-
-function SortPostsBy () {
+export default function SortPostsBy () {
   return (
     <div className='sortPostsByContainer'>
-      <h3 className='sortPostsByHeader'>Sort by:</h3>
+      <h3 className='sortPostsByHeader'>Sort by</h3>
       <ul className='sortPostsByFields'>
         <li className='sortPostsByField'>{SORT_BY.voteScore}</li>
         <li className='sortPostsByField'>{SORT_BY.timestampp}</li>
       </ul>
     </div>
   )
-}
-
-export {
-  SORT_BY,
-  SortPostsBy
 }
