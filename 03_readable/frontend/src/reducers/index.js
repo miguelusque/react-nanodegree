@@ -1,88 +1,31 @@
-import { combineReducers } from 'redux';
+import { LOAD_POSTS, FILTER_POSTS_BY_CATEGORY, SORT_POSTS_BY } from '../actions'
 
-import {
-	ADD_RECIPE,
-	REMOVE_FROM_CALENDAR
-} from '../actions'
+const initialPostsState = {
+  posts: []
+}
 
-function food (state = {}, action) {
+const posts = (state = initialPostsState, action) => {
   switch (action.type) {
-    case ADD_RECIPE:
-      const { recipe } = action
-
+    case LOAD_POSTS:
       return {
         ...state,
-        [recipe.label]: recipe
+        posts:action.posts
       }
+
+      case SORT_POSTS_BY:
+      const result = {...state};
+
+      // Sort posts
+      result.posts.sort((a,b) => b[action.field] - a[action.field]);
+      result.posts = result.posts.sort();
+
+      return result;
+    case FILTER_POSTS_BY_CATEGORY:
+      // TODO: TBC
+      break;
     default:
-      return state
+      return state;
   }
 }
 
-const initialCalendarState = {
-  sunday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  monday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  tuesday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  wednesday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  thursday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  friday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  saturday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null
-  }
-}
-
-function calendar (state = initialCalendarState, action) {
-	const {day, recipe, meal} = action;
-
-	switch (action.type) {
-		case ADD_RECIPE:
-			return {
-				...state,
-				[day]: {
-					...state[day],
-					[meal]: recipe.label
-				}
-			};
-		case REMOVE_FROM_CALENDAR:
-			return {
-				...state,
-				[day]: {
-					...state[day],
-					[meal]: null
-				}
-			};
-		default:
-			return state;
-	}
-}
-
-export default combineReducers({
-  food,
-  calendar,
-});
+export default posts;
