@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import Posts from './Posts';
 import Categories from './Categories';
-import {SORT_BY, SortPostsBy} from './SortPostsBy';
+import SortPostsBy from './SortPostsBy';
 
 import './css/PostsView.css';
 
 class PostsView extends Component {
-  state = {
-    sortBy: SORT_BY.voteScore
-  }
+
 
   render() {
-    const { sortBy } = this.state;
-    const { categories, posts } = this.props
+    const { categories } = this.props
 
     return (
       <div className='postsViewContainer'>
@@ -22,11 +19,10 @@ class PostsView extends Component {
 */
         />
         <SortPostsBy/>
-        <Posts posts={posts}/>
+        <Posts/>
       </div>
     );
   }
 }
-
 
 export default PostsView;

@@ -7,7 +7,7 @@ import './css/CategoriesView.css';
 
 class CategoriesView extends Component {
   render() {
-    const { posts, category } = this.props
+    const { category } = this.props
 
     return (
       <div className='categoriesViewContainer'>
@@ -19,7 +19,7 @@ class CategoriesView extends Component {
           </button>
         </div>
         <SortPostsBy/>
-        <Posts posts={posts}/>
+        <Posts/>
       </div>
     );
   }

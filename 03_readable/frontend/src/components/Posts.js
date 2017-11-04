@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { timestampToString } from '../utils/helpers'
 import './css/Posts.css';
@@ -43,4 +44,8 @@ class Posts extends Component {
   }
 }
 
-export default Posts
+const mapStateToProps = (state) => ({
+  posts: state.posts
+});
+
+export default connect(mapStateToProps)(Posts);
