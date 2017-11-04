@@ -1,45 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { timestampToString } from '../utils/helpers'
+import Post from './Post'
+import { fetchPosts } from '../utils/api';
+import { loadPosts, sortPostsBy } from '../actions'
 import './css/Posts.css';
 
 class Posts extends Component {
+  componentDidMount() {
+    fetchPosts().then((posts) => {
+      this.props.loadPosts(posts);
+    });
+  }
+
   render() {
-    let {posts, displayFullContent} = this.props;
-
-    if (!posts) {
-      posts = [];
-    }
-
-    // Sort posts by voteScore desc
-    posts.sort((a,b) => b.voteScore - a.voteScore);
-    posts = posts.sort();
+    const {posts, displayFullContent} = this.props;
 
     return (
       <div className='postsContainer'>
         <h3 className='postsHeader'>Posts</h3>
-          {posts.map((post) => (
-            displayFullContent === true ?
-              <div className='postContainer' key={post.id}>
-                <div className='postTitle'>{post.title}</div>
-                <div className='postBody'>{post.body}</div>
-                <div className='postDate'>Published: {timestampToString(post.timestamp)}</div>
-                <div className='postAuthor'>Author: {post.author}</div>
-                <div className='postCategory'>Category: {post.category}</div>
-                <div className='postScore'>Score: {post.voteScore}</div>
-              </div>
-              :
-              <div className='postContainer' key={post.id}>
-                <div className='postTitle'>{post.title}</div>
-              </div>
-          ))}
+        {posts.map((post) => (
+          <Post post={post} displayFullContent={displayFullContent} key={post.id} />
+        ))}
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  posts: state.posts
+  posts: state.posts ? state.posts: [],
+  sortedBy: state.sortedBy
 });
 
-export default connect(mapStateToProps)(Posts);
+const mapDispatchToProps = dispatch => ({
+  loadPosts: (posts) => dispatch(loadPosts(posts)),
+  sortPostsBy: (field) => dispatch(sortPostsBy(field))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
