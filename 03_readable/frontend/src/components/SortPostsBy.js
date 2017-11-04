@@ -8,8 +8,9 @@ export default function SortPostsBy () {
     <div className='sortPostsByContainer'>
       <h3 className='sortPostsByHeader'>Sort by</h3>
       <ul className='sortPostsByFields'>
-        <li className='sortPostsByField'>{SORTABLE_FIELDS.voteScore}</li>
-        <li className='sortPostsByField'>{SORTABLE_FIELDS.timestamp}</li>
+        {Object.keys(SORTABLE_FIELDS).map(field => (
+          <li className='sortPostsByField' key={field}>{SORTABLE_FIELDS[field]}</li>
+        ))}
       </ul>
     </div>
   )
