@@ -18,7 +18,7 @@ class Posts extends Component {
     return (
       <div className='postsContainer'>
         <h3 className='postsHeader'>Posts</h3>
-        {posts.map((post) => (
+        {posts.map(post => (
           <Post post={post} displayFullContent={displayFullContent} key={post.id} />
         ))}
       </div>
