@@ -1,0 +1,16 @@
+.categoriesViewContainer {
+  margin: 15px;
+}
+
+.categoriesClear {
+  font-size: 14px;
+  background-color: blue;
+  color: white;
+}
+
+.categoriesClearButton {
+  background: none;
+  border: none;
+  margin-left: 6px;
+  padding: 0px;
+}
