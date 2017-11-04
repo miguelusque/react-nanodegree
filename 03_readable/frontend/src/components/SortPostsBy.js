@@ -1,8 +1,9 @@
 import React from 'react'
-import { SORT_BY } from '../actions/index'
 import './css/SortPostsBy.css';
 
 export default function SortPostsBy () {
+  const SORT_BY = {voteScore: 'voteScore', timestampp: 'timestampp'};
+
   return (
     <div className='sortPostsByContainer'>
       <h3 className='sortPostsByHeader'>Sort by</h3>
