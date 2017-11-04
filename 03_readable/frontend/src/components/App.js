@@ -1,38 +1,57 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import * as ReadableAPI from '../utils/api';
 import PostsView from './PostsView'
+import CategoriesView from './CategoriesView'
+import { loadPosts } from '../actions'
 
 import './css/App.css';
 
 class App extends Component {
   state = {
     posts: [],
-    categories: []
+    categories: [],
+    filteredByCategory: false,
+    category: 'react'
   };
 
   componentDidMount() {
+    console.log(this.props)
+
     ReadableAPI.fetchPosts().then((posts) => {
-      this.setState({posts:posts});
+      this.props.loadPosts(posts);
     });
 
     ReadableAPI.fetchCategories().then((categories) => {
       this.setState(categories);
     });
-
   }
 
   render() {
-    const { posts, categories } = this.state;
+    const { categories, filteredByCategory, category } = this.state;
 
     return (
       <div className='pageContainer'>
         <header>
           <h1 className='pageTitle'>Readable</h1>
         </header>
-        <PostsView posts={posts} categories={categories}/>
+        { filteredByCategory
+          ?
+            <CategoriesView category={category}/>
+          :
+            <PostsView categories={categories}/>
+        }
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  posts: state.posts
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadPosts: (posts) => dispatch(loadPosts(posts))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
