@@ -20,8 +20,10 @@ const posts = (state = initialPostsState, action) => {
         posts: [...state.posts].sort((a,b) => b[action.field] - a[action.field])
       };
     case FILTER_POSTS_BY_CATEGORY:
-      // TODO: TBC
-      break;
+      return {
+        ... state,
+        posts: state.posts.filter(post => post.category === action.category)
+      };
     default:
       return state;
   }
