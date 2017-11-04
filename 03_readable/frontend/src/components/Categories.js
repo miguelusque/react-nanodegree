@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { fetchCategories }  from '../utils/api';
-
 import './css/Categories.css';
 
 class Categories extends Component {
