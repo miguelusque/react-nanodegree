@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import * as ReadableAPI from '../utils/api';
+import { fetchPosts } from '../utils/api';
 import PostsView from './PostsView'
 import CategoriesView from './CategoriesView'
 import { loadPosts } from '../actions'
@@ -10,25 +10,18 @@ import './css/App.css';
 class App extends Component {
   state = {
     posts: [],
-    categories: [],
     filteredByCategory: false,
     category: 'react'
   };
 
   componentDidMount() {
-    console.log(this.props)
-
-    ReadableAPI.fetchPosts().then((posts) => {
+    fetchPosts().then((posts) => {
       this.props.loadPosts(posts);
-    });
-
-    ReadableAPI.fetchCategories().then((categories) => {
-      this.setState(categories);
     });
   }
 
   render() {
-    const { categories, filteredByCategory, category } = this.state;
+    const { filteredByCategory, category } = this.state;
 
     return (
       <div className='pageContainer'>
@@ -39,7 +32,7 @@ class App extends Component {
           ?
             <CategoriesView category={category}/>
           :
-            <PostsView categories={categories}/>
+            <PostsView />
         }
       </div>
     );

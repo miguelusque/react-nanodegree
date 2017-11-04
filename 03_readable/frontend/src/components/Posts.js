@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { timestampToString } from '../utils/helpers'
 import './css/Posts.css';
 
 class Posts extends Component {
-  static propTypes = {
-    posts: PropTypes.array.isRequired,
-    displayFullContent: PropTypes.bool
-  }
-
   render() {
     let {posts, displayFullContent} = this.props;
 
