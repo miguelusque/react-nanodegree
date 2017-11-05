@@ -3,7 +3,8 @@ import { SORTABLE_FIELDS } from '../components/SortPostsBy'
 
 const initialPostsState = {
   posts: [],
-  sortedBy: SORTABLE_FIELDS.voteScore,
+  unfilteredPosts: [],
+  sortedBy: SORTABLE_FIELDS.score,
   filteredBy: ''
 }
 
@@ -13,18 +14,22 @@ const posts = (state = initialPostsState, action) => {
       // When loading posts, sort then by the initial sorting field (state.sortedBy)
       return {
         ...state,
-        posts:action.posts.sort((a,b) => b[state.sortedBy] - a[state.sortedBy])
+        posts:action.posts.sort((a,b) => b[state.sortedBy] - a[state.sortedBy]),
+        unfilteredPosts: [...action.posts]
       };
     case SORT_POSTS_BY:
       return {
         ...state,
         posts: [...state.posts].sort((a,b) => b[action.field] - a[action.field]),
+        unfilteredPosts: [...state.unfilteredPosts].sort((a,b) => b[action.field] - a[action.field]),
         sortedBy: action.field
       };
     case FILTER_POSTS_BY:
       return {
         ...state,
-        posts: [...state.posts].filter(post => post.category === action.category),
+        posts: action.category === ''
+          ? [...state.unfilteredPosts]
+          : [...state.posts].filter(post => post.category === action.category),
         filteredBy: action.category
       };
     default:
