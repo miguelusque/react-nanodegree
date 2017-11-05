@@ -1,9 +1,10 @@
-import { LOAD_POSTS, FILTER_POSTS_BY_CATEGORY, SORT_POSTS_BY } from '../actions'
+import { LOAD_POSTS, SORT_POSTS_BY, FILTER_POSTS_BY } from '../actions'
 import { SORTABLE_FIELDS } from '../components/SortPostsBy'
 
 const initialPostsState = {
   posts: [],
-  sortedBy: SORTABLE_FIELDS.timestamp
+  sortedBy: SORTABLE_FIELDS.voteScore,
+  filteredBy: ''
 }
 
 const posts = (state = initialPostsState, action) => {
@@ -17,12 +18,14 @@ const posts = (state = initialPostsState, action) => {
     case SORT_POSTS_BY:
       return {
         ...state,
-        posts: [...state.posts].sort((a,b) => b[action.field] - a[action.field])
+        posts: [...state.posts].sort((a,b) => b[action.field] - a[action.field]),
+        sortedBy: action.field
       };
-    case FILTER_POSTS_BY_CATEGORY:
+    case FILTER_POSTS_BY:
       return {
         ...state,
-        posts: state.posts.filter(post => post.category === action.category)
+        posts: [...state.posts].filter(post => post.category === action.category),
+        filteredBy: action.category
       };
     default:
       return state;
