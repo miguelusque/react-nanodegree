@@ -6,9 +6,11 @@ import './css/PostsView.css';
 
 class PostsView extends Component {
   render() {
+    const {categories} = this.props;
+
     return (
       <div className='postsViewContainer'>
-        <Categories/>
+        <Categories categories={categories}/>
         <SortPostsBy/>
         <Posts/>
       </div>
