@@ -4,7 +4,7 @@ import { sortPostsBy } from '../actions'
 
 import './css/SortPostsBy.css';
 
-export const SORTABLE_FIELDS = {voteScore: 'voteScore', timestamp: 'timestamp'};
+export const SORTABLE_FIELDS = {score: 'voteScore', date: 'timestamp'};
 
 class SortPostsBy extends Component {
   render () {
@@ -16,12 +16,12 @@ class SortPostsBy extends Component {
         {Object.keys(SORTABLE_FIELDS).map(field => (sortedBy === SORTABLE_FIELDS[field]
           ?
             <li className='sortPostsBySelectedField'
-              key={field}>{SORTABLE_FIELDS[field]}
+              key={field}>{field}
             </li>
           :
             <li className='sortPostsByField'
               key={field}
-              onClick={() => sortPostsBy(SORTABLE_FIELDS[field])}>{SORTABLE_FIELDS[field]}
+              onClick={() => sortPostsBy(SORTABLE_FIELDS[field])}>{field}
             </li>
         ))}
       </ul>
