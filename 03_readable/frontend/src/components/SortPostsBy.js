@@ -11,7 +11,7 @@ class SortPostsBy extends Component {
     const {sortPostsBy, sortedBy} = this.props;
 
     return <div className='sortPostsByContainer'>
-      <h3 className='sortPostsByHeader'>Sorted by</h3>
+      <h3 className='sortPostsByHeader'>Sort by</h3>
       <ul className='sortPostsByFields'>
         {Object.keys(SORTABLE_FIELDS).map(field => (sortedBy === SORTABLE_FIELDS[field]
           ?
