@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { fetchPosts } from '../utils/api';
+import { fetchPosts, fetchCategories } from '../utils/api';
 import { loadPosts } from '../actions'
 import PostsView from './PostsView'
 import CategoriesView from './CategoriesView'
 import './css/App.css';
 
 class App extends Component {
+  state = {
+    categories: []
+  };
+
   componentDidMount() {
-    console.log('componentDidMount')
     fetchPosts().then(posts => {
       this.props.loadPosts(posts);
+    });
+
+    fetchCategories().then((categories) => {
+      this.setState(categories);
     });
   }
 
   render() {
     const { filteredBy } = this.props;
+    const { categories } = this.state;
 
     return (
       <div className='pageContainer'>
@@ -23,7 +31,7 @@ class App extends Component {
           <h1 className='pageTitle'>Readable</h1>
         </header>
         { filteredBy === '' ?
-            <PostsView/>
+            <PostsView categories={categories}/>
           :
             <CategoriesView/>
         }
