@@ -21,7 +21,7 @@ const posts = (state = initialPostsState, action) => {
       };
     case FILTER_POSTS_BY_CATEGORY:
       return {
-        ... state,
+        ...state,
         posts: state.posts.filter(post => post.category === action.category)
       };
     default:
