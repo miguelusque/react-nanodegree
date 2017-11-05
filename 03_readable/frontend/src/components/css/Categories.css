@@ -13,7 +13,7 @@
   list-style-type: none;
 }
 
-.categoryName, .selectedCategoryName {
+.categoryName {
   font-size: 24px;
   margin-left: 15px;
   margin-bottom: 15px;
@@ -23,6 +23,9 @@
 }
 
 .selectedCategoryName {
-  border-bottom: 0px;
-  cursor: default;
+  font-size: 24px;
+  font-style: oblique;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  float: left;
 }
