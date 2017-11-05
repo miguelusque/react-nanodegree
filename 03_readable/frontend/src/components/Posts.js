@@ -10,9 +10,14 @@ class Posts extends Component {
     return (
       <div className='postsContainer'>
         <h3 className='postsHeader'>Posts</h3>
-        {posts.map(post => (
-          <Post post={post} displayFullContent={displayFullContent} key={post.id} />
-        ))}
+        {posts.length > 0
+          ?
+            posts.map(post => (
+              <Post post={post} displayFullContent={displayFullContent} key={post.id} />
+            ))
+          :
+          <div className='postsNoResultsFound'>No results found.</div>
+      }
       </div>
     )
   }
