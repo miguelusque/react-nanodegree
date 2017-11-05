@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Post from './Post'
 import { fetchPosts } from '../utils/api';
-import { loadPosts, sortPostsBy } from '../actions'
+import { loadPosts, sortPostsBy, filterPostsByCategory} from '../actions'
 import './css/Posts.css';
 
 class Posts extends Component {
   componentDidMount() {
-    fetchPosts().then((posts) => {
+    fetchPosts().then(posts => {
       this.props.loadPosts(posts);
     });
   }
@@ -32,8 +32,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadPosts: (posts) => dispatch(loadPosts(posts)),
-  sortPostsBy: (field) => dispatch(sortPostsBy(field))
+  loadPosts: posts => dispatch(loadPosts(posts)),
+  sortPostsBy: field => dispatch(sortPostsBy(field)),
+  filterPostsByCategory: category => dispatch(filterPostsByCategory(category))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
