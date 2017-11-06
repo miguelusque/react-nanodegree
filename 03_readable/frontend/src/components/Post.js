@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { timestampToString } from '../utils/helpers'
 import './css/Post.css';
 
 class Post extends Component {
+  static propTypes = {
+    onPostClick: PropTypes.func
+  }
+
   render() {
-    const {post, displayFullContent} = this.props;
+    const {post, displayFullContent, onPostClick} = this.props;
 
     return (displayFullContent ?
       <div className='postContainer'>
@@ -17,7 +22,9 @@ class Post extends Component {
       </div>
       :
       <div className='postContainer'>
-        <div className='postTitle'>{post.title}</div>
+        <div className='postTitle'>
+          <span className='postTitleClickable' onClick={() => onPostClick && onPostClick(post.id)} >{post.title}</span>
+        </div>
         <div className='postDate'>Published: {timestampToString(post.timestamp)}</div>
         <div className='postScore'>Score: {post.voteScore}</div>
       </div>
