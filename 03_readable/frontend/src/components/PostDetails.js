@@ -13,10 +13,8 @@ class PostDetails extends Component {
         <div className='postDetailsAuthorTitle'>Posted by <span className='postDetailsAuthor'>{post.author}</span>.</div>
         <div>
           <span className='postDetailsCategory'>#{post.category}</span>
-          <span className='postDetailsScore'> ({`${post.voteScore} `}{Math.abs(post.voteScore) === 1 ? 'vote': 'votes'}).</span>
+          <span className='postDetailsScore'> ({post.voteScore} {Math.abs(post.voteScore) === 1 ? 'vote': 'votes'}).</span>
         </div>
-
-
         <div className='postDetailsDate'> {timestampToString(post.timestamp)}</div>
       </div>
     )
