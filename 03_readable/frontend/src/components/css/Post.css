@@ -7,9 +7,17 @@
   font-size: 24px;
 }
 
+
+.postTitleClickable {
+  cursor: pointer;
+  border-bottom:1px solid;
+}
+
 .postBody {
   font-size: 18px;
   font-style: italic;
+  margin-top:15px;
+  margin-bottom: 10px;
 }
 
 .postDate, .postAuthor, .postCategory, .postScore {
