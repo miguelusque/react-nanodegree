@@ -1,0 +1,27 @@
+.postDetailsViewContainer {
+  margin: 15px;
+}
+
+.postDetailsViewToolBar {
+  padding: 0px;
+  margin: 0px 0px 2px 0px;
+  float:right;
+}
+
+.postDetailsViewButton,
+.postDetailsViewEditButton,
+.postDetailsViewDeleteButton {
+  font-size: 20px;
+  margin-left: 5px;
+  float: left;
+  cursor: pointer;
+  color:lightgrey;
+}
+
+.postDetailsViewEditButton:hover {
+  color: grey;
+}
+
+.postDetailsViewDeleteButton:hover {
+  color: red;
+}
