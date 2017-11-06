@@ -13,7 +13,6 @@ class Posts extends Component {
 
   openPostDetailsModal = (post) => {
     this.setState({postDetailsModalOpened: true, selectedPost: post});
-    console.log(this.state);
   }
 
   closePostDetailsModal = () => {
