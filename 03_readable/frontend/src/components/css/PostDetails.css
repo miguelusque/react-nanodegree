@@ -8,11 +8,13 @@
   font-size: 24px;
 }
 
+
 .postDetailsBody {
   font-size: 17px;
   margin-top:15px;
   margin-bottom: 10px;
 }
+
 
 .postDetailsDate,
 .postDetailsAuthor,
@@ -26,4 +28,16 @@
 .postDetailsAuthor,
 .postDetailsScore {
   font-style: oblique;
+}
+
+.postDetailsInput {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #bdbdbd;
+  outline: none;
+  margin-bottom: 15px;
+}
+
+.postDetailsSave {
+  margin-left: 15px;
 }

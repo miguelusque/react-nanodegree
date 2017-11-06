@@ -43,7 +43,7 @@ class Posts extends Component {
           contentLabel='Post details'>
           <div>
             {postDetailsModalOpened &&
-              <PostDetailsView post={selectedPost}/>
+              <PostDetailsView post={selectedPost} onClose={this.closePostDetailsModal}/>
             }
           </div>
         </Modal>
