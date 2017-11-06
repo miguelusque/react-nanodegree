@@ -15,18 +15,16 @@
 }
 
 .sortPostsByField {
-  font-size: 24px;
-  margin-left: 15px;
-  margin-bottom: 15px;
+  font-size: 18px;
+  margin: 8px 0px 15px 15px;
   float: left;
   cursor: pointer;
   border-bottom:1px solid;
 }
 
 .sortPostsBySelectedField {
-  font-size: 24px;
+  font-size: 18px;
   font-style: oblique;
-  margin-left: 15px;
-  margin-bottom: 15px;
+  margin: 8px 0px 15px 15px;
   float: left;
 }
