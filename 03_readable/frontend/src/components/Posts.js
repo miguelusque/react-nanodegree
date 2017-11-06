@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import Post from './Post'
+import PostDetailsView from './PostDetailsView'
 import './css/Posts.css';
 
 class Posts extends Component {
@@ -20,7 +21,7 @@ class Posts extends Component {
 	}
 
   render() {
-    const {posts, displayFullContent} = this.props;
+    const {posts} = this.props;
     const {postDetailsModalOpened, selectedPost} = this.state;
 
     return (
@@ -29,7 +30,7 @@ class Posts extends Component {
         { posts.length > 0
           ?
             posts.map(post => (
-              <Post post={post} displayFullContent={displayFullContent} key={post.id} onPostClick={() => this.openPostDetailsModal(post)} />
+              <Post post={post} key={post.id} onPostClick={() => this.openPostDetailsModal(post)} />
             ))
           :
           <div className='postsNoResultsFound'>No results found.</div>
@@ -43,7 +44,7 @@ class Posts extends Component {
           contentLabel='Post details'>
           <div>
             {postDetailsModalOpened &&
-              <Post post={selectedPost} displayFullContent={true}/>
+              <PostDetailsView post={selectedPost}/>
             }
           </div>
         </Modal>
