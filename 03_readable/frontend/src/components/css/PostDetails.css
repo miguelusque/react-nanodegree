@@ -9,10 +9,9 @@
 }
 
 .postDetailsBody {
-  font-size: 18px;
+  font-size: 17px;
   margin-top:15px;
   margin-bottom: 10px;
-  color: grey;
 }
 
 .postDetailsDate,
@@ -21,7 +20,7 @@
 .postDetailsCategory,
 .postDetailsScore {
   font-size:12px;
-  color: lightgrey;
+  color: grey;
 }
 
 .postDetailsAuthor,
