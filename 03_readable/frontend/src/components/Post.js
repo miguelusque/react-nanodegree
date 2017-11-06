@@ -9,18 +9,9 @@ class Post extends Component {
   }
 
   render() {
-    const {post, displayFullContent, onPostClick} = this.props;
+    const {post, onPostClick} = this.props;
 
-    return (displayFullContent ?
-      <div className='postContainer'>
-        <div className='postTitle'>{post.title}</div>
-        <div className='postBody'>{post.body}</div>
-        <div className='postDate'>Published: {timestampToString(post.timestamp)}</div>
-        <div className='postAuthor'>Author: {post.author}</div>
-        <div className='postCategory'>Category: {post.category}</div>
-        <div className='postScore'>Score: {post.voteScore}</div>
-      </div>
-      :
+    return (
       <div className='postContainer'>
         <div className='postTitle'>
           <span className='postTitleClickable' onClick={() => onPostClick && onPostClick(post.id)} >{post.title}</span>
