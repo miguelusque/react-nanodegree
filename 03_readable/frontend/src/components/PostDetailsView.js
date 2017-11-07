@@ -1,51 +1,91 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import PostDetails from './PostDetails';
+import { connect } from 'react-redux'
+import { updatePost } from '../actions'
+import { putUpdatedPost } from '../utils/api';
+import { timestampToString } from '../utils/helpers'
 import MdEdit from 'react-icons/lib/md/edit'
 import MdDelete from 'react-icons/lib/md/delete'
 import './css/PostDetailsView.css';
 
 class PostDetailsView extends Component {
-  static propTypes = {
-    onClose: PropTypes.func
-  };
-
   state = {
     editable: false
   };
-
 
   onEditHandler = () => {
     this.setState({editable: true});
   }
 
-  onEditedHandler = (post) => {
-    // Initialize voteScore after edition
-    // This is not requested in project, but usual in real life
-    // (Readers have voted for a different version of the post)
-    post = {...post,
-      voteScore: 0,
-      timestamp: Date.now()
-    }
+  onSaveHandler = () => {
+    const {updatePost} = this.props;
 
-    console.log(post);
+    const updatedFields = {
+      id: this.props.selectedPost.id,
+      title: this.title.value,
+      body: this.body.value
+    };
 
-    this.props.onClose();
+    // Update content on server
+    putUpdatedPost(updatedFields)
+      .then(updatePost(updatedFields))
+      .then(this.setState({editable: false})
+    );
   }
 
   render() {
-    const { editable } = this.state;
-    const { post } = this.props;
+    const {editable} = this.state;
+    const {selectedPost} = this.props;
 
     return (
       <div className='postDetailsViewContainer'>
-          <div className="postDetailsViewToolBar">
-            <MdEdit className='postDetailsViewEditButton' onClick={this.onEditHandler}/><MdDelete className='postDetailsViewDeleteButton'/>
-          </div>
-          <PostDetails post={post} editable={editable} onEdited={this.onEditedHandler}/>
+        <div className="postDetailsViewToolBar">
+          <MdEdit className='postDetailsViewEditButton' onClick={this.onEditHandler}/><MdDelete className='postDetailsViewDeleteButton'/>
+        </div>
+        { editable ?
+            <div className='postDetailsContainer'>
+              <div>
+                <div>Title</div>
+                <div className='paddedInput'>
+                  <input className='postDetailsTitleInput' defaultValue={selectedPost.title} ref={(title) => this.title = title}/>
+                </div>
+              </div>
+              <div>
+                <div>Content</div>
+                <textarea className='postDetailsBodyInput' type='text' defaultValue={selectedPost.body} ref={(body) => this.body = body}/>
+              </div>
+              <div className='postDetailsAuthorTitle'>Posted by <span className='postDetailsAuthor'>{selectedPost.author}</span>.</div>
+                <div>
+                  <span className='postDetailsCategory'>#{selectedPost.category}</span>
+                  <span className='postDetailsScore'> ({selectedPost.voteScore} {Math.abs(selectedPost.voteScore) === 1 ? 'vote': 'votes'}).</span>
+                </div>
+              <div className='postDetailsDate'> {timestampToString(selectedPost.timestamp)}</div>
+              <div className='postDetailsSave'>
+                <button onClick={this.onSaveHandler}>Save</button>
+              </div>
+            </div>
+          :
+            <div className='postDetailsContainer'>
+              <div className='postDetailsTitle'>{selectedPost.title}</div>
+              <div className='postDetailsBody'>{selectedPost.body}</div>
+              <div className='postDetailsAuthorTitle'>Posted by <span className='postDetailsAuthor'>{selectedPost.author}</span>.</div>
+              <div>
+                <span className='postDetailsCategory'>#{selectedPost.category}</span>
+                <span className='postDetailsScore'> ({selectedPost.voteScore} {Math.abs(selectedPost.voteScore) === 1 ? 'vote': 'votes'}).</span>
+              </div>
+              <div className='postDetailsDate'> {timestampToString(selectedPost.timestamp)}</div>
+            </div>
+        }
       </div>
     );
   }
 }
 
-export default PostDetailsView;
+const mapStateToProps = (state) => ({
+  selectedPost: state.selectedPost
+});
+
+const mapDispatchToProps = dispatch => ({
+  updatePost: updatedFields => dispatch(updatePost(updatedFields))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetailsView);
