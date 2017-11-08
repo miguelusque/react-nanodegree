@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { fetchPosts, fetchCategories } from '../utils/api';
+import { loadPosts as loadPostsServer, loadCategories as loadCategoriesServer } from '../utils/api';
 import { loadPosts } from '../actions'
 import PostsView from './PostsView'
 import CategoriesView from './CategoriesView'
@@ -12,11 +12,11 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetchPosts().then(posts => {
+    loadPostsServer().then(posts => {
       this.props.loadPosts(posts);
     });
 
-    fetchCategories().then((categories) => {
+    loadCategoriesServer().then((categories) => {
       this.setState(categories);
     });
   }
