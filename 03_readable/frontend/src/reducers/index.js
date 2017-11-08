@@ -1,5 +1,5 @@
-import { LOAD_POSTS, SORT_POSTS_BY, FILTER_POSTS_BY, UPDATE_POST, DELETE_POST } from '../actions'
-import { SORTABLE_FIELDS } from '../components/SortPostsBy'
+import { LOAD_POSTS, SORT_POSTS_BY, FILTER_POSTS_BY, UPDATE_POST, DELETE_POST } from '../actions';
+import { SORTABLE_FIELDS } from '../components/SortPostsBy';
 
 const initialPostsState = {
   posts: [],

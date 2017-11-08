@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { updatePost } from '../actions'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { updatePost } from '../actions';
 import { updatePost as updatePostServer } from '../utils/api';
-import { timestampToString } from '../utils/helpers'
+import { timestampToString } from '../utils/helpers';
 import './css/PostDetails.css';
 
 class PostDetails extends Component {

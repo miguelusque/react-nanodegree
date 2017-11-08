@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import { timestampToString } from '../utils/helpers'
+import PropTypes from 'prop-types';
+import { timestampToString } from '../utils/helpers';
 import './css/Post.css';
 
 class Post extends Component {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { filterPostsBy} from '../actions'
+import { connect } from 'react-redux';
+import { filterPostsBy} from '../actions';
 import Posts from './Posts';
 import SortPostsBy from './SortPostsBy';
-import MdClear from 'react-icons/lib/md/clear'
+import MdClear from 'react-icons/lib/md/clear';
 import './css/CategoriesView.css';
 
 class CategoriesView extends Component {

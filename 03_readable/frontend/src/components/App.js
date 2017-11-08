@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { loadPosts as loadPostsServer, loadCategories as loadCategoriesServer } from '../utils/api';
-import { loadPosts } from '../actions'
-import PostsView from './PostsView'
-import CategoriesView from './CategoriesView'
+import { loadPosts } from '../actions';
+import PostsView from './PostsView';
+import CategoriesView from './CategoriesView';
 import './css/App.css';
 
 class App extends Component {

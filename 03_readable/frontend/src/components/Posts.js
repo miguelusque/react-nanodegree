@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import Modal from 'react-modal'
-import Post from './Post'
-import PostDetailsView from './PostDetailsView'
+import { connect } from 'react-redux';
+import Modal from 'react-modal';
+import Post from './Post';
+import PostDetailsView from './PostDetailsView';
 import './css/Posts.css';
 
 class Posts extends Component {

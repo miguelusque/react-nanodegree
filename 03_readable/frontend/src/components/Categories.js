@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { filterPostsBy} from '../actions'
-
+import { connect } from 'react-redux';
+import { filterPostsBy} from '../actions';
 import './css/Categories.css';
 
 class Categories extends Component {

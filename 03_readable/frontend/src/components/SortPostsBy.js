@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { sortPostsBy } from '../actions'
-
+import { connect } from 'react-redux';
+import { sortPostsBy } from '../actions';
 import './css/SortPostsBy.css';
 
 export const SORTABLE_FIELDS = {score: 'voteScore', date: 'timestamp'};

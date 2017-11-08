@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import MdEdit from 'react-icons/lib/md/edit';
 import MdDelete from 'react-icons/lib/md/delete';
 import PropTypes from 'prop-types';
 import { deletePost } from '../actions';
-import { deletePost as deletePostServer} from '../utils/api'
-
-import PostDetails from './PostDetails'
+import { deletePost as deletePostServer} from '../utils/api';
+import PostDetails from './PostDetails';
 import './css/PostDetailsView.css';
 
 class PostDetailsView extends Component {
