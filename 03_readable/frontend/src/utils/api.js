@@ -2,7 +2,7 @@ const SERVER = process.env.REACT_APP_READABLE_API_URL || 'http://localhost:3001'
 const HEADERS = { headers: { 'Authorization': 'Lorem ipsum' } };
 
 // This method retrieves the list of posts (by category if not empty).
-export const fetchPosts = (category = '') => {
+export const loadPosts = (category = '') => {
   const url = category === '' ?
     `${SERVER}/posts` :
     `${SERVER}/:${category}/posts`;
@@ -14,7 +14,7 @@ export const fetchPosts = (category = '') => {
 }
 
 // This method retrieved the list of categories.
-export const fetchCategories = () => {
+export const loadCategories = () => {
   const url = `${SERVER}/categories`;
 
   return fetch(url, HEADERS)
@@ -24,15 +24,21 @@ export const fetchCategories = () => {
 }
 
 // This method updates a post
-export const putUpdatedPost = updatedFields => {
-  const url = `${SERVER}/posts/:${updatedFields.id}`;
+export const updatePost = updatedFields => {
+  const url = `${SERVER}/posts/${updatedFields.id}`;
 
-  return fetch(url,
-    {...HEADERS,
-      method: 'PUT',
-      body: JSON.stringify(updatedFields)
-    })
-    .then(checkStatus);
+  return fetch(url, {...HEADERS, method: 'PUT', body: JSON.stringify(updatedFields)})
+    .then(checkStatus)
+    .catch(error => console.log(error));
+}
+
+// This method deletes a post
+export const deletePost = postId => {
+  const url = `${SERVER}/posts/${postId}`;
+
+  return fetch(url, {...HEADERS, method: 'DELETE'})
+    .then(checkStatus)
+    .catch(error => console.log(error));
 }
 
 // This method handles response status
