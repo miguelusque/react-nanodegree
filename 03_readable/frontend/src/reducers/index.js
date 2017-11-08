@@ -9,7 +9,6 @@ const initialPostsState = {
 }
 
 const posts = (state = initialPostsState, action) => {
-  console.log('Action', action);
   switch (action.type) {
     case LOAD_POSTS:
       // When loading posts, sort then by the initial sorting field (state.sortedBy)
@@ -34,9 +33,9 @@ const posts = (state = initialPostsState, action) => {
       };
     case UPDATE_POST:
       const postsAfterUpdate = [
-        ...state.postsCache.filter(post => post.id !== action.updatedFields.id),
+        ...state.postsCache.filter(post => post.id !== action.postId),
         {
-          ...state.posts.filter(post => post.id === action.updatedFields.id)[0],
+          ...state.posts.filter(post => post.id === action.postId)[0],
           ...action.updatedFields
         }];
 
@@ -64,16 +63,13 @@ const posts = (state = initialPostsState, action) => {
 const dressPostsUp = (posts, sortedBy, filteredBy) => {
   let result = [...posts];
   if (sortedBy) {
-    console.log("sortedBy");
     result.sort((a,b) => b[sortedBy] - a[sortedBy])
   }
 
   if (filteredBy) {
-    console.log("filteredBy");
     result = result.filter(post => post.category === filteredBy)
   }
 
-  console.log(result);
   return result;
 }
 

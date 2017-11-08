@@ -28,8 +28,7 @@ class PostDetailsView extends Component {
     // Delete the post on both server and local
     deletePostServer(post.id)
       .then(deletePost(post.id))
-      .then(this.setState({deleted: true}))
-      .catch( () => {console.log("Error")});
+      .then(this.setState({deleted: true}));
   };
 
   render() {

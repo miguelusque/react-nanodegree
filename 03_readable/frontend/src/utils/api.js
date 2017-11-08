@@ -1,5 +1,9 @@
 const SERVER = process.env.REACT_APP_READABLE_API_URL || 'http://localhost:3001';
-const HEADERS = { headers: { 'Authorization': 'Lorem ipsum' } };
+const HEADERS = { headers: {
+  'Authorization': 'Lorem ipsum',
+  'Content-Type': 'application/json',
+  Accept: 'application/json'}
+};
 
 // This method retrieves the list of posts (by category if not empty).
 export const loadPosts = (category = '') => {
@@ -24,10 +28,10 @@ export const loadCategories = () => {
 }
 
 // This method updates a post
-export const updatePost = updatedFields => {
-  const url = `${SERVER}/posts/${updatedFields.id}`;
+export const updatePost = (postId, updatedFields) => {
+  const url = `${SERVER}/posts/${postId}`;
 
-  return fetch(url, {...HEADERS, method: 'PUT', body: JSON.stringify(updatedFields)})
+  return fetch(url, {...HEADERS, method: 'put', body: JSON.stringify(updatedFields)})
     .then(checkStatus)
     .catch(error => console.log(error));
 }
@@ -36,7 +40,7 @@ export const updatePost = updatedFields => {
 export const deletePost = postId => {
   const url = `${SERVER}/posts/${postId}`;
 
-  return fetch(url, {...HEADERS, method: 'DELETE'})
+  return fetch(url, {...HEADERS, method: 'delete'})
     .then(checkStatus)
     .catch(error => console.log(error));
 }

@@ -19,8 +19,9 @@ export const filterPostsBy = category => ({
   category
 });
 
-export const updatePost = updatedFields => ({
+export const updatePost = (postId, updatedFields) => ({
   type: UPDATE_POST,
+  postId,
   updatedFields
 });
 

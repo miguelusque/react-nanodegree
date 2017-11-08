@@ -31,14 +31,13 @@ class PostDetails extends Component {
     const {post} = this.state;
 
     const updatedFields = {
-      id: post.id,
       title: post.title,
       body: post.body
     };
 
     // Update the post on both server and local
-    updatePostServer(updatedFields)
-      .then(updatePost(updatedFields))
+    updatePostServer(post.id, updatedFields)
+      .then(updatePost(post.id, updatedFields))
       .then(onSaved);
   }
 
@@ -86,7 +85,7 @@ class PostDetails extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updatePost: updatedFields => dispatch(updatePost(updatedFields))
+  updatePost: (postId, updatedFields) => dispatch(updatePost(postId, updatedFields))
 });
 
 export default connect(null, mapDispatchToProps)(PostDetails);
