@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { updatePost } from '../actions'
-import { putUpdatedPost } from '../utils/api';
+import { updatePost as updatePostServer } from '../utils/api';
 import { timestampToString } from '../utils/helpers'
 import './css/PostDetails.css';
 
@@ -36,8 +36,8 @@ class PostDetails extends Component {
       body: post.body
     };
 
-    // Update content on server
-    putUpdatedPost(updatedFields)
+    // Update the post on both server and local
+    updatePostServer(updatedFields)
       .then(updatePost(updatedFields))
       .then(onSaved);
   }
@@ -46,9 +46,6 @@ class PostDetails extends Component {
     const {editable} = this.props;
     const {post} = this.state;
 
-    const onTitleChangeHandler = (event) => {this.setState({post: {...post, title: event.target.value}})};
-    const onBodyChangeHandler = (event) => {this.setState({post: {...post, body: event.target.value}})};
-
     return (
       <div className='postDetailsContainer'>
         { editable ?
@@ -56,12 +53,14 @@ class PostDetails extends Component {
             <div>
               <div>Title</div>
               <div className='paddedInput'>
-                <input className='postDetailsTitleInput' type='text' value={post.title} onChange={onTitleChangeHandler}/>
+                <input className='postDetailsTitleInput' type='text' value={post.title}
+                  onChange={(e) => {this.setState({post: {...post, title: e.target.value}})}}/>
               </div>
             </div>
             <div>
               <div>Content</div>
-              <textarea className='postDetailsBodyInput' type='text' value={post.body} onChange={onBodyChangeHandler}/>
+              <textarea className='postDetailsBodyInput' type='text' value={post.body}
+                onChange={(e) => {this.setState({post: {...post, body: e.target.value}})}}/>
             </div>
           </div>
           :
@@ -91,3 +90,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(null, mapDispatchToProps)(PostDetails);
+
+// TODO: componentWillReceiveProps(nextProps)
+// In this project there is no use case where it might be needed to
+// double check any change in props.post. I will implement a better
+// solution after finishing this nanodegree.  :-)
