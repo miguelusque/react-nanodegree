@@ -7,18 +7,33 @@ import { timestampToString } from '../utils/helpers'
 import './css/PostDetails.css';
 
 class PostDetails extends Component {
+  static defaultProps = {
+    post: {},
+    editable: false
+  };
+
   static propTypes = {
     editable: PropTypes.bool,
-    onSaved: PropTypes.func
+    onSaved: PropTypes.func,
+    post: PropTypes.object.isRequired
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      post: props.post
+    };
   }
 
   onSaveHandler = () => {
     const {updatePost, onSaved} = this.props;
+    const {post} = this.state;
 
     const updatedFields = {
-      id: this.props.selectedPost.id,
-      title: this.title.value,
-      body: this.body.value
+      id: post.id,
+      title: post.title,
+      body: post.body
     };
 
     // Update content on server
@@ -28,7 +43,11 @@ class PostDetails extends Component {
   }
 
   render() {
-    const {editable, selectedPost} = this.props;
+    const {editable} = this.props;
+    const {post} = this.state;
+
+    const onTitleChangeHandler = (event) => {this.setState({post: {...post, title: event.target.value}})};
+    const onBodyChangeHandler = (event) => {this.setState({post: {...post, body: event.target.value}})};
 
     return (
       <div className='postDetailsContainer'>
@@ -37,27 +56,26 @@ class PostDetails extends Component {
             <div>
               <div>Title</div>
               <div className='paddedInput'>
-                <input className='postDetailsTitleInput' defaultValue={selectedPost.title} ref={(title) => this.title = title}/>
+                <input className='postDetailsTitleInput' type='text' value={post.title} onChange={onTitleChangeHandler}/>
               </div>
             </div>
-
             <div>
               <div>Content</div>
-              <textarea className='postDetailsBodyInput' type='text' defaultValue={selectedPost.body} ref={(body) => this.body = body}/>
+              <textarea className='postDetailsBodyInput' type='text' value={post.body} onChange={onBodyChangeHandler}/>
             </div>
           </div>
           :
           <div>
-            <div className='postDetailsTitle'>{selectedPost.title}</div>
-            <div className='postDetailsBody'>{selectedPost.body}</div>
+            <div className='postDetailsTitle'>{post.title}</div>
+            <div className='postDetailsBody'>{post.body}</div>
           </div>
         }
-        <div className='postDetailsAuthorTitle'>Posted by <span className='postDetailsAuthor'>{selectedPost.author}</span>.</div>
+        <div className='postDetailsAuthorTitle'>Posted by <span className='postDetailsAuthor'>{post.author}</span>.</div>
         <div>
-          <span className='postDetailsCategory'>#{selectedPost.category}</span>
-          <span className='postDetailsScore'> ({selectedPost.voteScore} {Math.abs(selectedPost.voteScore) === 1 ? 'vote': 'votes'}).</span>
+          <span className='postDetailsCategory'>#{post.category}</span>
+          <span className='postDetailsScore'> ({post.voteScore} {Math.abs(post.voteScore) === 1 ? 'vote': 'votes'}).</span>
         </div>
-        <div className='postDetailsDate'> {timestampToString(selectedPost.timestamp)}</div>
+        <div className='postDetailsDate'> {timestampToString(post.timestamp)}</div>
         { editable &&
           <div className='postDetailsSave'>
             <button onClick={this.onSaveHandler}>Save</button>
@@ -68,12 +86,8 @@ class PostDetails extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  selectedPost: state.selectedPost
-});
-
 const mapDispatchToProps = dispatch => ({
   updatePost: updatedFields => dispatch(updatePost(updatedFields))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);
+export default connect(null, mapDispatchToProps)(PostDetails);

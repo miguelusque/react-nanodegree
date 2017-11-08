@@ -1,12 +1,11 @@
-import { LOAD_POSTS, SORT_POSTS_BY, FILTER_POSTS_BY, UPDATE_POST, SELECT_POST } from '../actions'
+import { LOAD_POSTS, SORT_POSTS_BY, FILTER_POSTS_BY, UPDATE_POST } from '../actions'
 import { SORTABLE_FIELDS } from '../components/SortPostsBy'
 
 const initialPostsState = {
   posts: [],
   unfilteredPosts: [],
   sortedBy: SORTABLE_FIELDS.score,
-  filteredBy: '',
-  selectedPost: {}
+  filteredBy: ''
 }
 
 const posts = (state = initialPostsState, action) => {
@@ -46,11 +45,8 @@ const posts = (state = initialPostsState, action) => {
           updatedPost].sort((a,b) => b[state.sortedBy] - a[state.sortedBy]),
         unfilteredPosts: [
           ...state.unfilteredPosts.filter(post => post.id !== action.updatedFields.id),
-          updatedPost].sort((a,b) => b[state.sortedBy] - a[state.sortedBy]),
-        selectedPost: updatedPost
+          updatedPost].sort((a,b) => b[state.sortedBy] - a[state.sortedBy])
       };
-    case SELECT_POST:
-      return {...state, selectedPost: action.selectedPost};
     default:
       return state;
   }

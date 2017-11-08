@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
-import { selectPost } from '../actions'
 import Post from './Post'
 import PostDetailsView from './PostDetailsView'
 import './css/Posts.css';
 
 class Posts extends Component {
   state = {
-    postDetailsModalOpened: false
+    postDetailsModalOpened: false,
+    selectedPost: {}
   }
 
   openPostDetailsModal = (post) => {
-    this.props.selectPost(post);
-    this.setState({postDetailsModalOpened: true});
+    this.setState({postDetailsModalOpened: true, selectedPost: post});
   }
 
   closePostDetailsModal = () => {
@@ -22,7 +21,7 @@ class Posts extends Component {
 
   render() {
     const {posts} = this.props;
-    const {postDetailsModalOpened} = this.state;
+    const {postDetailsModalOpened, selectedPost} = this.state;
 
     return (
       <div className='postsContainer'>
@@ -43,7 +42,7 @@ class Posts extends Component {
           onRequestClose={this.closePostDetailsModal}
           contentLabel='Post details'>
           <div>
-            <PostDetailsView/>
+            <PostDetailsView post={selectedPost}/>
           </div>
         </Modal>
       </div>
@@ -55,8 +54,4 @@ const mapStateToProps = (state) => ({
   posts: state.posts ? state.posts: []
 });
 
-const mapDispatchToProps = dispatch => ({
-  selectPost: selectedPost => dispatch(selectPost(selectedPost))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default connect(mapStateToProps)(Posts);
