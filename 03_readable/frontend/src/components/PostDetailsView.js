@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { deletePost } from '../actions';
 import { deletePost as deletePostServer} from '../utils/api';
 import PostDetails from './PostDetails';
+import Comments from './Comments';
 import './css/PostDetailsView.css';
 
 class PostDetailsView extends Component {
@@ -44,7 +45,10 @@ class PostDetailsView extends Component {
         { deleted ?
           <span>This post has been sucessfully deleted</span>
         :
-          <PostDetails post={post} editable={editable} onSaved={() => {this.setState({editable: false});}}/>
+          <div>
+            <PostDetails post={post} editable={editable} onSaved={() => {this.setState({editable: false});}}/>
+            <Comments postId={post.id} />
+          </div>
         }
       </div>
     );

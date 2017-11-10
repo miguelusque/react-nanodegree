@@ -1,0 +1,13 @@
+.commentContainer {
+  margin: 8px 0px 15px 15px;
+}
+
+.commentBody {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.commentDate, .commentScore {
+  font-size:12px;
+  color: grey;
+}

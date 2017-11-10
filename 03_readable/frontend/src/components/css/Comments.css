@@ -1,0 +1,17 @@
+.commentsContainer {
+  clear: right;
+  margin-top: 16px;
+}
+
+.commentsHeader {
+  font-weight: normal;
+  font-size: 16px;
+  margin: 0px;
+}
+
+.commentsNoResultsFound {
+  clear: right;
+  margin-top: 16px;
+  font-size: 15px;
+  font-style: oblique;
+}
