@@ -44,7 +44,7 @@ class PostDetailsView extends Component {
         { deleted ?
           <span>This post has been sucessfully deleted</span>
         :
-        <PostDetails post={post} editable={editable} onSaved={() => {this.setState({editable: false});}}/>
+          <PostDetails post={post} editable={editable} onSaved={() => {this.setState({editable: false});}}/>
         }
       </div>
     );
