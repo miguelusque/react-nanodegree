@@ -26,3 +26,17 @@
   font-style: oblique;
   cursor: default;
 }
+
+.categoriesClear {
+  font-size: 14px;
+  background-color: grey;
+  color: white;
+}
+
+.categoriesClearButton {
+  background: none;
+  border: none;
+  margin-left: 6px;
+  padding: 0px;
+  cursor: pointer;
+}

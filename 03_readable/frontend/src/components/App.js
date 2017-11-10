@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { loadPosts as loadPostsServer, loadCategories as loadCategoriesServer } from '../utils/api';
 import { loadPosts } from '../actions';
 import PostsView from './PostsView';
-import CategoriesView from './CategoriesView';
 import './css/App.css';
 
 class App extends Component {
@@ -22,7 +21,6 @@ class App extends Component {
   }
 
   render() {
-    const { filteredBy } = this.props;
     const { categories } = this.state;
 
     return (
@@ -30,11 +28,7 @@ class App extends Component {
         <header>
           <h1 className='pageTitle'>Readable</h1>
         </header>
-        { filteredBy === '' ?
-            <PostsView categories={categories}/>
-          :
-            <CategoriesView/>
-        }
+        <PostsView categories={categories}/>
       </div>
     );
   }
