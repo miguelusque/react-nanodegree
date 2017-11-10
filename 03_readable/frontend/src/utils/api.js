@@ -45,6 +45,16 @@ export const deletePost = postId => {
     .catch(error => console.log(error));
 }
 
+// This method loads the comments  a post
+export const loadComments = postId => {
+  const url = `${SERVER}/posts/${postId}/comments`;
+
+  return fetch(url, HEADERS)
+  .then(checkStatus)
+  .then(res => (res.ok ? res.json() : []))
+  .catch(() => []);
+}
+
 // This method handles response status
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
