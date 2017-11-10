@@ -5,6 +5,7 @@ import './css/Post.css';
 
 class Post extends Component {
   static propTypes = {
+    post: PropTypes.object.isRequired,
     onPostClick: PropTypes.func
   }
 
