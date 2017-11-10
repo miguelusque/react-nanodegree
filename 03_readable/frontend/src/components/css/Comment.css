@@ -7,7 +7,32 @@
   margin-bottom: 4px;
 }
 
-.commentDate, .commentScore {
+.commentAuthorTitle, .commentDate, .commentScore {
   font-size:12px;
   color: grey;
+}
+
+.commentAuthor {
+  font-style: oblique;
+}
+
+.commentThumbButton {
+  font-size: 16px;
+  margin-right: 5px;
+  cursor: pointer;
+  color:lightgrey;
+}
+
+.commentThumbButton:hover {
+  color: grey;
+}
+
+.commentThumbsToolBar {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
 }

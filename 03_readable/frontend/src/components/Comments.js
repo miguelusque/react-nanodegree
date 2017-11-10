@@ -17,13 +17,18 @@ class Comments extends Component {
   componentDidMount() {
     const {postId} = this.props;
 
+    // Load comments from server
     loadCommentsServer(postId).then((comments) => {
       this.setState({comments});
     });
   }
 
   render() {
-    const {comments} = this.state;
+    let {comments} = this.state;
+
+    // Sort comments by voteScore asc
+    comments.sort((a,b) => b.voteScore - a.voteScore);
+
     return comments.length > 0
       ?
         <div className='commentsContainer'>

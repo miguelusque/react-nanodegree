@@ -55,6 +55,15 @@ export const loadComments = postId => {
   .catch(() => []);
 }
 
+// This method updates the comment's voteScore
+export const updateCommentVoteScore = (commentId, option) => {
+  const url = `${SERVER}/comments/${commentId}`;
+
+  return fetch(url, {...HEADERS, method: 'post', body: JSON.stringify(option)})
+    .then(checkStatus)
+    .catch(error => console.log(error));
+}
+
 // This method handles response status
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
