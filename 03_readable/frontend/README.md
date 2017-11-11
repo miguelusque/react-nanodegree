@@ -7,12 +7,14 @@ This is the frontend of a content and comment web app. Users will be able to pos
 
 In order to install and run this project, please follow these steps:
 
-* Open a terminal window. Then install and start the API server
+* Open a terminal window. Then install and start the API server:
     - `cd server`
     - `npm install`
     - `node server`
 
-* Open another temrinal window. Then install and start the web server
+* Open another temrinal window. Then install and start the web server:
     - `cd frontend`
     - `npm install`
     - `npm start`
+
+I really hope you like it!
