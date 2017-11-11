@@ -17,7 +17,15 @@
   border-bottom:1px solid;
 }
 
-.postDate, .postScore {
+.postAuthor,
+.postAuthorTitle,
+.postDate,
+.postScore,
+.postCommentCount {
   font-size:12px;
   color: grey;
+}
+
+.postAuthor {
+  font-style: oblique;
 }
