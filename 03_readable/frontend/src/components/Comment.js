@@ -15,9 +15,14 @@ class Comment extends Component {
     voteScore: PropTypes.number
   }
 
-  state = {
-    voteScore: undefined
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      comment: props.comment,
+      voteScore: undefined
+    };
+  }
 
   // This method updates the voteScore of a comment.
   // Please notice that the comments are not resorted automatically
@@ -25,8 +30,7 @@ class Comment extends Component {
   // behive like that to avoid 'redrawing' the post details interface
   // while the user is voting on the comments.
   updateVoteScore = option => {
-    const {comment} = this.props;
-    const {voteScore} = this.state;
+    const {comment, voteScore} = this.state;
 
     let step;
     switch(option) {
@@ -49,8 +53,7 @@ class Comment extends Component {
   };
 
   render() {
-    const {comment} = this.props;
-    const {voteScore} = this.state;
+    const {comment, voteScore} = this.state;
 
     return (
       <div className='commentContainer'>
