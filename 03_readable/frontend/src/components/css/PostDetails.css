@@ -24,8 +24,7 @@
   color: grey;
 }
 
-.postDetailsAuthor,
-.postDetailsScore {
+.postDetailsAuthor {
   font-style: oblique;
 }
 

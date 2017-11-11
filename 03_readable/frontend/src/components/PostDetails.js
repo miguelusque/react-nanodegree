@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updatePost } from '../actions';
-import { updatePost as updatePostServer } from '../utils/api';
+import { updatePost, updatePostVoteScore } from '../actions';
+import { updatePost as updatePostServer, updatePostVoteScore as updatePostVoteScoreServer  } from '../utils/api';
 import { timestampToString } from '../utils/helpers';
+import ThumbsToolBar from './ThumbsToolBar';
 import './css/PostDetails.css';
+
+const UP_VOTE = 'upVote';
+const DOWN_VOTE = 'downVote';
 
 class PostDetails extends Component {
   static defaultProps = {
@@ -25,6 +29,29 @@ class PostDetails extends Component {
       post: props.post
     };
   }
+
+  // This method updates the voteScore of a post
+  updateVoteScore = option => {
+    const {updatePostVoteScore} = this.props;
+    const {post} = this.state;
+
+    let step;
+    switch(option) {
+      case DOWN_VOTE:
+        step = -1;
+        break;
+      case UP_VOTE:
+        step = 1;
+        break;
+      default:
+        step = 0;
+    }
+
+    //Update the post's voteScore on both server and local
+    updatePostVoteScoreServer(post.id, {option: option})
+      .then(updatePostVoteScore(post.id, post.voteScore + step))
+      .then(this.setState({post: {...post, voteScore: post.voteScore + step}}));
+  };
 
   onSaveHandler = () => {
     const {updatePost, onSaved} = this.props;
@@ -69,11 +96,12 @@ class PostDetails extends Component {
           </div>
         }
         <div className='postDetailsAuthorTitle'>Posted by <span className='postDetailsAuthor'>{post.author}</span>.</div>
-        <div>
-          <span className='postDetailsCategory'>#{post.category}</span>
-          <span className='postDetailsScore'> ({post.voteScore} {Math.abs(post.voteScore) === 1 ? 'vote': 'votes'}).</span>
-        </div>
+        <div className='postDetailsCategory'>#{post.category}</div>
         <div className='postDetailsDate'> {timestampToString(post.timestamp)}</div>
+        <div className='postDetailsScore'>Score: {post.voteScore}</div>
+        <ThumbsToolBar
+          onThumbUpClick={() => { this.updateVoteScore(UP_VOTE); }}
+          onThumbDownClick={() => { this.updateVoteScore(DOWN_VOTE); }}/>
         { editable &&
           <div className='postDetailsSave'>
             <button onClick={this.onSaveHandler}>Save</button>
@@ -85,7 +113,9 @@ class PostDetails extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updatePost: (postId, updatedFields) => dispatch(updatePost(postId, updatedFields))
+  updatePost: (postId, updatedFields) => dispatch(updatePost(postId, updatedFields)),
+  updatePostVoteScore: (postId, voteScore) => dispatch(updatePostVoteScore(postId, voteScore))
+
 });
 
 export default connect(null, mapDispatchToProps)(PostDetails);
