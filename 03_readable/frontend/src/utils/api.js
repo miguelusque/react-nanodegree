@@ -73,6 +73,15 @@ export const updateCommentVoteScore = (commentId, option) => {
     .catch(error => console.log(error));
 }
 
+// This method deletes a comment
+export const deleteComment = commentId => {
+  const url = `${SERVER}/comments/${commentId}`;
+
+  return fetch(url, {...HEADERS, method: 'delete'})
+    .then(checkStatus)
+    .catch(error => console.log(error));
+}
+
 // This method handles response status
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { timestampToString } from '../utils/helpers';
 import { updateCommentVoteScore as updateCommentVoteScoreServer } from '../utils/api';
+import ActionsToolBar from './ActionsToolBar'
 import ThumbsToolBar from './ThumbsToolBar';
 
 import './css/Comment.css';
@@ -54,9 +55,14 @@ class Comment extends Component {
 
   render() {
     const {comment, voteScore} = this.state;
+    const {onDelete} = this.props;
 
     return (
       <div className='commentContainer'>
+        <ActionsToolBar
+          onEdit={() => this.setState({editable: true})}
+          onDelete={onDelete}
+        />
         <div className='commentBody'>{comment.body}</div>
         <div className='commentAuthorTitle'>Added by <span className='commentAuthor'>{comment.author}</span>.</div>
         <div className='commentDate'>Published: {timestampToString(comment.timestamp)}</div>

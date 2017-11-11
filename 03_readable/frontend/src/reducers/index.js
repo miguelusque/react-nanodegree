@@ -1,4 +1,4 @@
-import { LOAD_POSTS, SORT_POSTS_BY, FILTER_POSTS_BY, UPDATE_POST, DELETE_POST, UPDATE_POST_VOTE_SCORE } from '../actions';
+import { LOAD_POSTS, SORT_POSTS_BY, FILTER_POSTS_BY, UPDATE_POST, DELETE_POST, UPDATE_POST_VOTE_SCORE, DELETE_COMMENT } from '../actions';
 import { SORTABLE_FIELDS } from '../components/SortPostsBy';
 
 const initialPostsState = {
@@ -14,7 +14,7 @@ const posts = (state = initialPostsState, action) => {
       // When loading posts, sort then by the initial sorting field (state.sortedBy)
       return {
         ...state,
-        posts: dressPostsUp(action.posts, state.sortedBy),
+        posts: dressPostsUp(action.posts, state.sortedBy, action.category),
         postsCache: action.posts
       };
     case SORT_POSTS_BY:
@@ -56,8 +56,8 @@ const posts = (state = initialPostsState, action) => {
       const postsAfterUpdateVoteScore = [
         ...state.postsCache.filter(post => post.id !== action.postId),
         {
-         ...state.postsCache.filter(post => post.id === action.postId)[0],
-         voteScore:action.voteScore
+          ...state.postsCache.filter(post => post.id === action.postId)[0],
+          voteScore:action.voteScore
         }
       ];
 
@@ -66,6 +66,23 @@ const posts = (state = initialPostsState, action) => {
         posts: dressPostsUp(postsAfterUpdateVoteScore, state.sortedBy, state.filteredBy),
         postsCache: postsAfterUpdateVoteScore
       };
+    case DELETE_COMMENT:
+      const postsAfterDeleteComment = [
+        ...state.postsCache.filter(post => post.id !== action.parentId),
+        {
+          ...state.postsCache.filter(post => post.id === action.parentId)[0],
+          commentCount:action.commentCount
+        }
+      ];
+
+      return {
+        ...state,
+        posts: dressPostsUp(postsAfterDeleteComment, state.sortedBy, state.filteredBy),
+        postsCache: postsAfterDeleteComment
+      };
+
+
+
     default:
       return state;
   }
