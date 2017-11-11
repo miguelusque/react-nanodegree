@@ -16,10 +16,6 @@ class Post extends Component {
     onPostClick: PropTypes.func
   }
 
-  state = {
-    voteScore: undefined
-  };
-
   // This method updates the voteScore of a post
   updateVoteScore = option => {
     const {post, updatePostVoteScore} = this.props;
@@ -50,12 +46,13 @@ class Post extends Component {
         <div className='postTitle'>
           <span className='postTitleClickable' onClick={() => onPostClick && onPostClick(post.id)} >{post.title}</span>
         </div>
+        <div className='postAuthorTitle'>Posted by <span className='postAuthor'>{post.author}</span>.</div>
         <div className='postDate'>Published: {timestampToString(post.timestamp)}</div>
+        <div className='postCommentCount'>{post.commentCount} {post.commentCount !== 1 ? 'comments' : 'comment'}</div>
         <div className='postScore'>Score: {post.voteScore}</div>
         <ThumbsToolBar
           onThumbUpClick={() => { this.updateVoteScore(UP_VOTE); }}
-          onThumbDownClick={() => { this.updateVoteScore(DOWN_VOTE); }}
-        />
+          onThumbDownClick={() => { this.updateVoteScore(DOWN_VOTE); }}/>
       </div>
     )
   }
