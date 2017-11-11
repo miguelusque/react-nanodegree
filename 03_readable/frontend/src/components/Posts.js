@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import Post from './Post';
 import PostDetailsView from './PostDetailsView';
-import PostActionsToolBar from './PostActionsToolBar'
+import ActionsToolBar from './ActionsToolBar'
 import { deletePost } from '../actions';
 import { deletePost as deletePostServer} from '../utils/api';
 
@@ -44,7 +44,7 @@ class Posts extends Component {
           ?
             posts.map(post => (
               <div key={post.id}>
-                <PostActionsToolBar
+                <ActionsToolBar
                   key={post.id}
                   onEdit={() => this.openPostDetailsModal(post, true)}
                   onDelete={() => this.onDeleteHandler(post.id)}

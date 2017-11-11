@@ -1,4 +1,4 @@
-.postActionsToolBar {
+.actionsToolBar {
   padding: 0px;
   margin: 0px 0px 2px 0px;
   float:right;
@@ -11,8 +11,8 @@
   user-select: none;
 }
 
-.postActionsToolBarEditButton,
-.postActionsToolBarDeleteButton {
+.actionsToolBarEditButton,
+.actionsToolBarDeleteButton {
   font-size: 20px;
   margin-left: 5px;
   float: left;
@@ -20,10 +20,10 @@
   color:lightgrey;
 }
 
-.postActionsToolBarEditButton:hover {
+.actionsToolBarEditButton:hover {
   color: grey;
 }
 
-.postActionsToolBarDeleteButton:hover {
+.actionsToolBarDeleteButton:hover {
   color: red;
 }

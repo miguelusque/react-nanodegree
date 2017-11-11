@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { deletePost } from '../actions';
 import { deletePost as deletePostServer} from '../utils/api';
 import PostDetails from './PostDetails';
-import PostActionsToolBar from './PostActionsToolBar'
+import ActionsToolBar from './ActionsToolBar'
 import Comments from './Comments';
 import './css/PostDetailsView.css';
 
@@ -41,7 +41,7 @@ class PostDetailsView extends Component {
 
     return (
       <div className='postDetailsViewContainer'>
-        <PostActionsToolBar
+        <ActionsToolBar
           onEdit={() => this.setState({editable: true})}
           onDelete={this.onDeleteHandler}
         />

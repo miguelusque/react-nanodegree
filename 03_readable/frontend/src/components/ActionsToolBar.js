@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MdEdit from 'react-icons/lib/md/edit';
 import MdDelete from 'react-icons/lib/md/delete';
-import './css/PostActionsToolBar.css';
+import './css/ActionsToolBar.css';
 
-class PostActionsToolBar extends Component {
+class ActionsToolBar extends Component {
   static propTypes = {
     onEdit: PropTypes.func,
     onDelete: PropTypes.func
@@ -14,12 +14,12 @@ class PostActionsToolBar extends Component {
     const {onEdit, onDelete} = this.props;
 
     return (
-      <div className='postActionsToolBar' unselectable="on">
-        <MdEdit className='postActionsToolBarEditButton' onClick={onEdit}/>
-        <MdDelete className='postActionsToolBarDeleteButton' onClick={onDelete}/>
+      <div className='actionsToolBar' unselectable="on">
+        <MdEdit className='actionsToolBarEditButton' onClick={onEdit}/>
+        <MdDelete className='actionsToolBarDeleteButton' onClick={onDelete}/>
       </div>
     )
   }
 }
 
-export default PostActionsToolBar;
+export default ActionsToolBar;
