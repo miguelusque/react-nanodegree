@@ -55,6 +55,15 @@ export const loadComments = postId => {
   .catch(() => []);
 }
 
+// This method updates the post's voteScore
+export const updatePostVoteScore = (postId, option) => {
+  const url = `${SERVER}/posts/${postId}`;
+
+  return fetch(url, {...HEADERS, method: 'post', body: JSON.stringify(option)})
+    .then(checkStatus)
+    .catch(error => console.log(error));
+}
+
 // This method updates the comment's voteScore
 export const updateCommentVoteScore = (commentId, option) => {
   const url = `${SERVER}/comments/${commentId}`;

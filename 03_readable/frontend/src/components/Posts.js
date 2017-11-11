@@ -30,6 +30,7 @@ class Posts extends Component {
           ?
             posts.map(post => (
               <Post post={post} key={post.id} onPostClick={() => this.openPostDetailsModal(post)} />
+
             ))
           :
           <div className='postsNoResultsFound'>No results found.</div>

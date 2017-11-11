@@ -1,4 +1,4 @@
-import { LOAD_POSTS, SORT_POSTS_BY, FILTER_POSTS_BY, UPDATE_POST, DELETE_POST } from '../actions';
+import { LOAD_POSTS, SORT_POSTS_BY, FILTER_POSTS_BY, UPDATE_POST, DELETE_POST, UPDATE_POST_VOTE_SCORE } from '../actions';
 import { SORTABLE_FIELDS } from '../components/SortPostsBy';
 
 const initialPostsState = {
@@ -52,8 +52,20 @@ const posts = (state = initialPostsState, action) => {
         posts: dressPostsUp(postsAfterDelete, state.sortedBy, state.filteredBy),
         postsCache: postsAfterDelete
       };
+    case UPDATE_POST_VOTE_SCORE:
+      const postsAfterUpdateVoteScore = [
+        ...state.postsCache.filter(post => post.id !== action.postId),
+        {
+         ...state.postsCache.filter(post => post.id === action.postId)[0],
+         voteScore:action.voteScore
+        }
+      ];
 
-
+      return {
+        ...state,
+        posts: dressPostsUp(postsAfterUpdateVoteScore, state.sortedBy, state.filteredBy),
+        postsCache: postsAfterUpdateVoteScore
+      };
     default:
       return state;
   }

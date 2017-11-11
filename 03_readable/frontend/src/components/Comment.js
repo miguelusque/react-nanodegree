@@ -22,8 +22,8 @@ class Comment extends Component {
   // This method updates the voteScore of a comment.
   // Please notice that the comments are not resorted automatically
   // when the voteScore changes. I have decided the application should
-  // behive like that to avoid 'redrawing' the post details interface while
-  // the user is voting on the comments.
+  // behive like that to avoid 'redrawing' the post details interface
+  // while the user is voting on the comments.
   updateVoteScore = option => {
     const {comment} = this.props;
     const {voteScore} = this.state;
