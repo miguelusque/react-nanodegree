@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { loadComments as loadCommentsServer } from '../utils/api';
-
 import Comment from './Comment';
 import './css/Comments.css';
 
