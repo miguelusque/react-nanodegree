@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MdEdit from 'react-icons/lib/md/edit';
-import MdDelete from 'react-icons/lib/md/delete';
 import PropTypes from 'prop-types';
 import { deletePost } from '../actions';
 import { deletePost as deletePostServer} from '../utils/api';
 import PostDetails from './PostDetails';
+import PostActionsToolBar from './PostActionsToolBar'
 import Comments from './Comments';
 import './css/PostDetailsView.css';
 
@@ -38,10 +37,10 @@ class PostDetailsView extends Component {
 
     return (
       <div className='postDetailsViewContainer'>
-        <div className="postDetailsViewToolBar">
-          <MdEdit className='postDetailsViewEditButton' onClick={() => { this.setState({editable: true}); }}/>
-          <MdDelete className='postDetailsViewDeleteButton' onClick={this.onDeleteHandler}/>
-        </div>
+        <PostActionsToolBar
+          onEdit={() => this.setState({editable: true})}
+          onDelete={this.onDeleteHandler}
+        />
         { deleted ?
           <span>This post has been sucessfully deleted</span>
         :
