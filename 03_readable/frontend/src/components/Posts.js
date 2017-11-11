@@ -3,25 +3,39 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import Post from './Post';
 import PostDetailsView from './PostDetailsView';
+import PostActionsToolBar from './PostActionsToolBar'
+import { deletePost } from '../actions';
+import { deletePost as deletePostServer} from '../utils/api';
+
+
 import './css/Posts.css';
 
 class Posts extends Component {
   state = {
     postDetailsModalOpened: false,
-    selectedPost: {}
+    selectedPost: {},
+    editable: false
   }
 
-  openPostDetailsModal = (post) => {
-    this.setState({postDetailsModalOpened: true, selectedPost: post});
+  openPostDetailsModal = (post, editable) => {
+    this.setState({postDetailsModalOpened: true, selectedPost: post, editable: editable});
   }
 
   closePostDetailsModal = () => {
     this.setState({postDetailsModalOpened: false});
-	}
+  }
+
+  onDeleteHandler = (postId) => {
+    const {deletePost} = this.props;
+
+    // Delete the post on both server and local
+    deletePostServer(postId)
+      .then(deletePost(postId));
+  };
 
   render() {
     const {posts} = this.props;
-    const {postDetailsModalOpened, selectedPost} = this.state;
+    const {postDetailsModalOpened, selectedPost, editable} = this.state;
 
     return (
       <div className='postsContainer'>
@@ -29,8 +43,14 @@ class Posts extends Component {
         { posts.length > 0
           ?
             posts.map(post => (
-              <Post post={post} key={post.id} onPostClick={() => this.openPostDetailsModal(post)} />
-
+              <div key={post.id}>
+                <PostActionsToolBar
+                  key={post.id}
+                  onEdit={() => this.openPostDetailsModal(post, true)}
+                  onDelete={() => this.onDeleteHandler(post.id)}
+                />
+                <Post post={post}  onPostClick={() => this.openPostDetailsModal(post, false)} />
+              </div>
             ))
           :
           <div className='postsNoResultsFound'>No results found.</div>
@@ -43,7 +63,7 @@ class Posts extends Component {
           onRequestClose={this.closePostDetailsModal}
           contentLabel='Post details'>
           <div>
-            <PostDetailsView post={selectedPost}/>
+            <PostDetailsView post={selectedPost} editable={editable}/>
           </div>
         </Modal>
       </div>
@@ -55,4 +75,8 @@ const mapStateToProps = (state) => ({
   posts: state.posts ? state.posts: []
 });
 
-export default connect(mapStateToProps)(Posts);
+const mapDispatchToProps = dispatch => ({
+  deletePost: postId => dispatch(deletePost(postId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);

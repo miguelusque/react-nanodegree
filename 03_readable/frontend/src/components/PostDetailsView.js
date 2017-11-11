@@ -17,10 +17,14 @@ class PostDetailsView extends Component {
     post: PropTypes.object.isRequired
   }
 
-  state = {
-    editable: false,
-    deleted: false
-  };
+  // Initializa state with props
+  constructor(props) {
+    super(props);
+    this.state = {
+      deleted: false,
+      editable: props.editable
+    }
+  }
 
   onDeleteHandler = () => {
     const {post, deletePost} = this.props;
