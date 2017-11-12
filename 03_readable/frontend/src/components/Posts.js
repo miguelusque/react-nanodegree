@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import Post from './Post';
 import PostDetailsView from './PostDetailsView';
 import ActionsToolBar from './ActionsToolBar'
+import NewPost from './NewPost'
 import { deletePost } from '../actions';
 import { deletePost as deletePostServer} from '../utils/api';
 
@@ -13,6 +14,7 @@ import './css/Posts.css';
 class Posts extends Component {
   state = {
     postDetailsModalOpened: false,
+    newPostModalOpened: false,
     selectedPost: {},
     editable: false
   }
@@ -33,12 +35,22 @@ class Posts extends Component {
       .then(deletePost(postId));
   };
 
+  closeNewPostModal = () => {
+    this.setState({newPostModalOpened: false});
+
+  }
+
+  onSavedHandler = () => {
+    this.closeNewPostModal();
+  }
+
   render() {
-    const {posts} = this.props;
-    const {postDetailsModalOpened, selectedPost, editable} = this.state;
+    const {posts, categories} = this.props;
+    const {postDetailsModalOpened, newPostModalOpened, selectedPost, editable} = this.state;
 
     return (
       <div className='postsContainer'>
+        <span className='addNewPost' onClick={() => this.setState({newPostModalOpened:true})}>Add new post</span>
         <h3 className='postsHeader'>Posts</h3>
         { posts.length > 0
           ?
@@ -64,6 +76,17 @@ class Posts extends Component {
           contentLabel='Post details'>
           <div>
             <PostDetailsView post={selectedPost} editable={editable}/>
+          </div>
+        </Modal>
+
+        <Modal
+          className='newPostModal'
+          overlayClassName='newPostOverlay'
+          isOpen={newPostModalOpened}
+          onRequestClose={this.closeNewPostModal}
+          contentLabel='Add new post'>
+          <div>
+            <NewPost categories={categories} onCanceled={this.closeNewPostModal} onSaved={this.onSavedHandler}/>
           </div>
         </Modal>
       </div>

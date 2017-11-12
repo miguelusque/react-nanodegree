@@ -12,7 +12,7 @@ class PostsView extends Component {
       <div className='postsViewContainer'>
         <Categories categories={categories}/>
         <SortPostsBy/>
-        <Posts/>
+        <Posts categories={categories}/>
       </div>
     );
   }

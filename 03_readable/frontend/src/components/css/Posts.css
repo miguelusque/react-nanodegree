@@ -41,3 +41,14 @@
   bottom: 0px;
   background-color: rgba(255, 255, 255, 0.75);
 }
+
+.addNewPost {
+  cursor: default;
+  float: right;
+  border-bottom:1px solid;
+}
+
+.addNewPost:hover {
+  cursor: pointer;
+  color: blue;
+}
