@@ -75,11 +75,12 @@ class PostDetails extends Component {
   }
 
   render() {
+    const {editable} = this.props;
     const {post} = this.state;
 
     return (
       <div className='postDetailsContainer'>
-        { this.props.editable ?
+        { editable ?
           <div>
             <div>
               <div>Title</div>
