@@ -18,10 +18,6 @@ class NewPost extends Component {
     categories: PropTypes.array
   };
 
-  state = {
-    saveDisabled : true
-  };
-
   // This method handles the onSave event
   onSaveHandler = () => {
     const {categories} = this.props;
