@@ -14,7 +14,7 @@ class Comment extends Component {
   static propTypes = {
     comment: PropTypes.object.isRequired,
     voteScore: PropTypes.number
-  }
+  };
 
   constructor(props) {
     super(props);

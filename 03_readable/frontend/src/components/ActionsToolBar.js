@@ -8,7 +8,7 @@ class ActionsToolBar extends Component {
   static propTypes = {
     onEdit: PropTypes.func,
     onDelete: PropTypes.func
-  }
+  };
 
   render() {
     const {onEdit, onDelete} = this.props;

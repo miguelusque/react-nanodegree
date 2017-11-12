@@ -15,7 +15,7 @@ class PostDetailsView extends Component {
 
   static propTypes = {
     post: PropTypes.object.isRequired
-  }
+  };
 
   // Initializa state with props
   constructor(props) {

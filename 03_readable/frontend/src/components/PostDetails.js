@@ -16,7 +16,7 @@ class PostDetails extends Component {
     onSaved: PropTypes.func,
     onCancelled: PropTypes.func,
     post: PropTypes.object.isRequired
-  }
+  };
 
   constructor(props) {
     super(props);

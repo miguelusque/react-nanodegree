@@ -8,7 +8,7 @@ class ThumbsToolBar extends Component {
   static propTypes = {
     onThumbUpClick: PropTypes.func,
     onThumbDownClick: PropTypes.func
-  }
+  };
 
   render() {
     const {onThumbUpClick, onThumbDownClick} = this.props;

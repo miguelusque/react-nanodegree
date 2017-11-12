@@ -9,7 +9,7 @@ import './css/Comments.css';
 class Comments extends Component {
   static propTypes = {
     postId: PropTypes.string.isRequired
-  }
+  };
 
   state = {
     comments: []

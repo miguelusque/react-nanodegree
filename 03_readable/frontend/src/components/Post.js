@@ -14,7 +14,7 @@ class Post extends Component {
   static propTypes = {
     post: PropTypes.object.isRequired,
     onPostClick: PropTypes.func
-  }
+  };
 
   // This method updates the voteScore of a post
   updateVoteScore = option => {
