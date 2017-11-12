@@ -11,14 +11,10 @@ const UP_VOTE = 'upVote';
 const DOWN_VOTE = 'downVote';
 
 class PostDetails extends Component {
-  static defaultProps = {
-    post: {},
-    editable: false
-  };
-
   static propTypes = {
     editable: PropTypes.bool,
     onSaved: PropTypes.func,
+    onCancelled: PropTypes.func,
     post: PropTypes.object.isRequired
   }
 
@@ -32,7 +28,6 @@ class PostDetails extends Component {
 
   // This method updates the voteScore of a post
   updateVoteScore = option => {
-    const {updatePostVoteScore} = this.props;
     const {post} = this.state;
 
     let step;
@@ -49,12 +44,12 @@ class PostDetails extends Component {
 
     //Update the post's voteScore on both server and local
     updatePostVoteScoreServer(post.id, {option: option})
-      .then(updatePostVoteScore(post.id, post.voteScore + step))
+      .then(this.props.updatePostVoteScore(post.id, post.voteScore + step))
       .then(this.setState({post: {...post, voteScore: post.voteScore + step}}));
   };
 
+  // This method handles the onSave edit event
   onSaveHandler = () => {
-    const {updatePost, onSaved} = this.props;
     const {post} = this.state;
 
     const updatedFields = {
@@ -64,17 +59,27 @@ class PostDetails extends Component {
 
     // Update the post on both server and local
     updatePostServer(post.id, updatedFields)
-      .then(updatePost(post.id, updatedFields))
-      .then(onSaved);
+      .then(this.props.updatePost(post.id, updatedFields))
+      .then(this.setState({updatedFields: updatedFields}))  // Store in state to be used when cancelling edition
+      .then(this.props.onSaved);
+  }
+
+  // This method handles the onCancel edit event
+  onCancelHandler = () => {
+    this.setState(
+      { post: {
+        ...this.state.post,
+        ...this.state.updatedFields ? this.state.updatedFields : this.props.post}
+      });
+    this.props.onCancelled();
   }
 
   render() {
-    const {editable} = this.props;
     const {post} = this.state;
 
     return (
       <div className='postDetailsContainer'>
-        { editable ?
+        { this.props.editable ?
           <div>
             <div>
               <div>Title</div>
@@ -103,8 +108,9 @@ class PostDetails extends Component {
           onThumbUpClick={() => { this.updateVoteScore(UP_VOTE); }}
           onThumbDownClick={() => { this.updateVoteScore(DOWN_VOTE); }}/>
         { editable &&
-          <div className='postDetailsSave'>
-            <button onClick={this.onSaveHandler}>Save</button>
+          <div className='postDetailsButtons'>
+            <button className='postDetailsButton' onClick={this.onCancelHandler}>Cancel</button>
+            <button className='postDetailsButton' onClick={this.onSaveHandler}>Save</button>
           </div>
         }
       </div>

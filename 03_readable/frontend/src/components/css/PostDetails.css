@@ -51,7 +51,11 @@
 }
 
 
-.postDetailsSave {
+.postDetailsButtons {
   float: right;
-  margin-left: 15px;
+}
+
+.postDetailsButton {
+  margin-left: 5px;
+  cursor: pointer;
 }
