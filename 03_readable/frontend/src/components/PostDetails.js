@@ -83,14 +83,14 @@ class PostDetails extends Component {
         { editable ?
           <div>
             <div>
-              <div>Title</div>
+              <label>Title</label>
               <div className='paddedInput'>
                 <input className='postDetailsTitleInput' type='text' value={post.title}
                   onChange={(e) => {this.setState({post: {...post, title: e.target.value}})}}/>
               </div>
             </div>
             <div>
-              <div>Content</div>
+              <label>Content</label>
               <textarea className='postDetailsBodyInput' rows="10" type='text' value={post.body}
                 onChange={(e) => {this.setState({post: {...post, body: e.target.value}})}}/>
             </div>

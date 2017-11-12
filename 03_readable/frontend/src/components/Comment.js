@@ -88,7 +88,7 @@ class Comment extends Component {
         />
         { editable ?
           <div>
-            <div>Comment</div>
+            <label>Body</label>
             <textarea className='commentBodyInput' type='text' value={comment.body}
               onChange={(e) => {this.setState(
                 {comment: {...comment, body: e.target.value, timestamp:Date.now()}})}}/>
