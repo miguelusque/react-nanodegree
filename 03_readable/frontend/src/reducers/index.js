@@ -1,4 +1,4 @@
-import { LOAD_POSTS, SORT_POSTS_BY, FILTER_POSTS_BY, UPDATE_POST, DELETE_POST, UPDATE_POST_VOTE_SCORE, DELETE_COMMENT } from '../actions';
+import { ACTIONS } from '../actions';
 import { SORTABLE_FIELDS } from '../components/SortPostsBy';
 
 const initialPostsState = {
@@ -10,20 +10,20 @@ const initialPostsState = {
 
 const posts = (state = initialPostsState, action) => {
   switch (action.type) {
-    case LOAD_POSTS:
+    case ACTIONS.LOAD_POSTS:
       // When loading posts, sort then by the initial sorting field (state.sortedBy)
       return {
         ...state,
         posts: dressPostsUp(action.posts, state.sortedBy, action.category),
         postsCache: action.posts
       };
-    case SORT_POSTS_BY:
+    case ACTIONS.SORT_POSTS_BY:
       return {
         ...state,
         posts: dressPostsUp(state.postsCache, action.field),
         sortedBy: action.field
       };
-    case FILTER_POSTS_BY:
+    case ACTIONS.FILTER_POSTS_BY:
       return {
         ...state,
         posts: action.category === ''
@@ -31,7 +31,18 @@ const posts = (state = initialPostsState, action) => {
           : dressPostsUp(state.postsCache, state.sortedBy, action.category),
         filteredBy: action.category
       };
-    case UPDATE_POST:
+    case ACTIONS.ADD_POST:
+      const postsAfterAdd = [
+        ...state.postsCache,
+        action.post
+      ];
+
+      return {
+        ...state,
+        posts: dressPostsUp(postsAfterAdd, state.sortedBy, state.filteredBy),
+        postsCache : postsAfterAdd
+      };
+    case ACTIONS.UPDATE_POST:
       const postsAfterUpdate = [
         ...state.postsCache.filter(post => post.id !== action.postId),
         {
@@ -44,7 +55,7 @@ const posts = (state = initialPostsState, action) => {
         posts: dressPostsUp(postsAfterUpdate, state.sortedBy, state.filteredBy),
         postsCache: postsAfterUpdate
       };
-    case DELETE_POST:
+    case ACTIONS.DELETE_POST:
       const postsAfterDelete = [...state.postsCache.filter(post => post.id !== action.postId) ];
 
       return {
@@ -52,7 +63,7 @@ const posts = (state = initialPostsState, action) => {
         posts: dressPostsUp(postsAfterDelete, state.sortedBy, state.filteredBy),
         postsCache: postsAfterDelete
       };
-    case UPDATE_POST_VOTE_SCORE:
+    case ACTIONS.UPDATE_POST_VOTE_SCORE:
       const postsAfterUpdateVoteScore = [
         ...state.postsCache.filter(post => post.id !== action.postId),
         {
@@ -66,8 +77,8 @@ const posts = (state = initialPostsState, action) => {
         posts: dressPostsUp(postsAfterUpdateVoteScore, state.sortedBy, state.filteredBy),
         postsCache: postsAfterUpdateVoteScore
       };
-    case DELETE_COMMENT:
-      const postsAfterDeleteComment = [
+    case ACTIONS.UPDATE_COMMENT_COUNT:
+      const postsAfterUpdateCommentCount = [
         ...state.postsCache.filter(post => post.id !== action.parentId),
         {
           ...state.postsCache.filter(post => post.id === action.parentId)[0],
@@ -77,12 +88,9 @@ const posts = (state = initialPostsState, action) => {
 
       return {
         ...state,
-        posts: dressPostsUp(postsAfterDeleteComment, state.sortedBy, state.filteredBy),
-        postsCache: postsAfterDeleteComment
+        posts: dressPostsUp(postsAfterUpdateCommentCount, state.sortedBy, state.filteredBy),
+        postsCache: postsAfterUpdateCommentCount
       };
-
-
-
     default:
       return state;
   }

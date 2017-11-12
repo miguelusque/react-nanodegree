@@ -27,6 +27,15 @@ export const loadCategories = () => {
     .catch(() => []);
 }
 
+// This method adds a new post to the list of posts
+export const addPost = post => {
+  const url = `${SERVER}/posts`;
+
+  return fetch(url, {...HEADERS, method: 'post', body: JSON.stringify(post)})
+    .then(checkStatus)
+    .catch(error => console.log(error));
+}
+
 // This method updates a post
 export const updatePost = (postId, updatedFields) => {
   const url = `${SERVER}/posts/${postId}`;
@@ -53,6 +62,15 @@ export const loadComments = postId => {
   .then(checkStatus)
   .then(res => (res.ok ? res.json() : []))
   .catch(() => []);
+}
+
+// This method adds a new post to the list of posts
+export const addComment = comment => {
+  const url = `${SERVER}/comments`;
+
+  return fetch(url, {...HEADERS, method: 'post', body: JSON.stringify(comment)})
+    .then(checkStatus)
+    .catch(error => console.log(error));
 }
 
 // This method updates the post's voteScore
