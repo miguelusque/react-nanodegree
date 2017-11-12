@@ -1,5 +1,9 @@
 .commentsContainer {
-  clear: right;
+  clear: left;
+  margin-top: 24px;
+}
+
+.commentsList {
   margin-top: 16px;
 }
 
@@ -12,6 +16,18 @@
 .commentsNoResultsFound {
   clear: right;
   margin-top: 16px;
+  margin-left: 15px;
   font-size: 15px;
   font-style: oblique;
+}
+
+.addNewComment {
+  cursor: default;
+  float: right;
+  border-bottom:1px solid;
+}
+
+.addNewComment:hover {
+  cursor: pointer;
+  color: blue;
 }
