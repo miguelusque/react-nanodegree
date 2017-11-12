@@ -92,6 +92,10 @@ class Comment extends Component {
             <textarea className='commentBodyInput' type='text' value={comment.body}
               onChange={(e) => {this.setState(
                 {comment: {...comment, body: e.target.value, timestamp:Date.now()}})}}/>
+            <div className='commentButtons'>
+              <button className='commentButton' onClick={this.onCancelHandler}>Cancel</button>
+              <button className='commentButton' onClick={this.onSaveHandler}>Save</button>
+            </div>
           </div>
         :
           <div>
@@ -105,12 +109,6 @@ class Comment extends Component {
           onThumbUpClick={() => { this.updateVoteScore(UP_VOTE); }}
           onThumbDownClick={() => { this.updateVoteScore(DOWN_VOTE); }}
         />
-        { editable &&
-          <div className='commentButtons'>
-            <button className='commentButton' onClick={this.onCancelHandler}>Cancel</button>
-            <button className='commentButton' onClick={this.onSaveHandler}>Save</button>
-          </div>
-        }
       </div>
     )
   }

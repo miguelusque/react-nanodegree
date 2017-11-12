@@ -91,8 +91,12 @@ class PostDetails extends Component {
             </div>
             <div>
               <div>Content</div>
-              <textarea className='postDetailsBodyInput' type='text' value={post.body}
+              <textarea className='postDetailsBodyInput' rows="10" type='text' value={post.body}
                 onChange={(e) => {this.setState({post: {...post, body: e.target.value}})}}/>
+            </div>
+            <div className='postDetailsButtons'>
+              <button className='postDetailsButton' onClick={this.onCancelHandler}>Cancel</button>
+              <button className='postDetailsButton' onClick={this.onSaveHandler}>Save</button>
             </div>
           </div>
           :
@@ -108,12 +112,6 @@ class PostDetails extends Component {
         <ThumbsToolBar
           onThumbUpClick={() => { this.updateVoteScore(UP_VOTE); }}
           onThumbDownClick={() => { this.updateVoteScore(DOWN_VOTE); }}/>
-        { editable &&
-          <div className='postDetailsButtons'>
-            <button className='postDetailsButton' onClick={this.onCancelHandler}>Cancel</button>
-            <button className='postDetailsButton' onClick={this.onSaveHandler}>Save</button>
-          </div>
-        }
       </div>
     );
   }
