@@ -64,6 +64,16 @@ export const updatePostVoteScore = (postId, option) => {
     .catch(error => console.log(error));
 }
 
+// This method updates a comment
+export const updateComment = (commentId, updatedFields) => {
+  const url = `${SERVER}/comments/${commentId}`;
+
+  return fetch(url, {...HEADERS, method: 'put', body: JSON.stringify(updatedFields)})
+    .then(checkStatus)
+    .catch(error => console.log(error));
+}
+
+
 // This method updates the comment's voteScore
 export const updateCommentVoteScore = (commentId, option) => {
   const url = `${SERVER}/comments/${commentId}`;

@@ -67,9 +67,9 @@ class PostDetails extends Component {
   // This method handles the onCancel edit event
   onCancelHandler = () => {
     this.setState(
-      { post: {
-        ...this.state.post,
-        ...this.state.updatedFields ? this.state.updatedFields : this.props.post}
+      { post: this.state.updatedFields
+          ? {...this.state.post, ...this.state.updatedFields}
+          : {...this.props.post}
       });
     this.props.onCancelled();
   }
