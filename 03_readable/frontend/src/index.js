@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter} from 'react-router-dom';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
@@ -13,8 +14,10 @@ const store = createStore(
  )
 
  ReactDOM.render(
-	<Provider store={ store }>
-		<App />
-	</Provider>, document.getElementById('root'));
+	<BrowserRouter>
+		<Provider store={ store }>
+			<App />
+		</Provider>
+	</BrowserRouter>, document.getElementById('root'));
 
 registerServiceWorker();

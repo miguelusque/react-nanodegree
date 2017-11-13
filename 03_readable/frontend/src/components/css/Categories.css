@@ -40,3 +40,12 @@
   padding: 0px;
   cursor: pointer;
 }
+
+.categoryLink {
+  text-decoration: none;
+}
+
+.categoryLink:visited {
+  text-decoration: none;
+  color: black;
+}

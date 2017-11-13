@@ -10,6 +10,7 @@
 
 .postTitleClickable {
   cursor: default;
+  color: black;
 }
 
 .postTitleClickable:hover {
@@ -28,4 +29,13 @@
 
 .postAuthor {
   font-style: oblique;
+}
+
+.postLink {
+  text-decoration: none;
+}
+
+.postLink:visited {
+  text-decoration: none;
+  color: black;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import Post from './Post';
@@ -7,8 +8,6 @@ import ActionsToolBar from './ActionsToolBar'
 import NewPost from './NewPost'
 import { deletePost } from '../actions';
 import { deletePost as deletePostServer} from '../utils/api';
-
-
 import './css/Posts.css';
 
 class Posts extends Component {
@@ -61,23 +60,25 @@ class Posts extends Component {
                   onEdit={() => this.openPostDetailsModal(post, true)}
                   onDelete={() => this.onDeleteHandler(post.id)}
                 />
-                <Post post={post}  onPostClick={() => this.openPostDetailsModal(post, false)} />
+                <Post post={post} onPostClick={() => this.openPostDetailsModal(post, false)}/>
               </div>
             ))
           :
           <div className='postsNoResultsFound'>No results found.</div>
         }
 
-        <Modal
-          className='postDetailsModal'
-          overlayClassName='postDetailsOverlay'
-          isOpen={postDetailsModalOpened}
-          onRequestClose={this.closePostDetailsModal}
-          contentLabel='Post details'>
-          <div>
-            <PostDetailsView post={selectedPost} editable={editable}/>
-          </div>
-        </Modal>
+        <Route path="/" render={ ({history}) => (
+          <Modal
+            className='postDetailsModal'
+            overlayClassName='postDetailsOverlay'
+            isOpen={postDetailsModalOpened}
+            onRequestClose={() => {history.goBack(); this.closePostDetailsModal()}}
+            contentLabel='Post details'>
+            <div>
+              <PostDetailsView post={selectedPost} editable={editable}/>
+            </div>
+          </Modal>
+        )}/>
 
         <Modal
           className='newPostModal'

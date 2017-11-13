@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { timestampToString } from '../utils/helpers';
@@ -44,7 +45,10 @@ class Post extends Component {
     return (
       <div className='postContainer'>
         <div className='postTitle'>
-          <span className='postTitleClickable' onClick={() => onPostClick && onPostClick(post.id)} >{post.title}</span>
+          <Link className='postLink' to={`/${post.category}/${post.id}`}
+            onClick={() => onPostClick && onPostClick(post.id)}>
+            <span className='postTitleClickable' >{post.title}</span>
+          </Link>
         </div>
         <div className='postAuthorTitle'>Posted by <span className='postAuthor'>{post.author}</span>.</div>
         <div className='postDate'>Published: {timestampToString(post.timestamp)}</div>

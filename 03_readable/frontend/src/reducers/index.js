@@ -20,7 +20,7 @@ const posts = (state = initialPostsState, action) => {
     case ACTIONS.SORT_POSTS_BY:
       return {
         ...state,
-        posts: dressPostsUp(state.postsCache, action.field),
+        posts: dressPostsUp(state.postsCache, action.field, state.filteredBy),
         sortedBy: action.field
       };
     case ACTIONS.FILTER_POSTS_BY:
