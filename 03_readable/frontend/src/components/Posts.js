@@ -18,13 +18,27 @@ class Posts extends Component {
     editable: false
   }
 
-  openPostDetailsModal = (post, editable) => {
-    this.setState({postDetailsModalOpened: true, selectedPost: post, editable: editable});
+  componentWillReceiveProps(props) {
+    const {category, postId } = props.match.params;
+
+    // Display post details when navigation is performed by bookmarked pages.
+    if (category && postId) {
+      const post = props.posts.filter((post) => post.id === postId)[0];
+      if (post) {
+        this.openPostDetailsModal(post, false)
+      }
+    }
   }
 
+  openPostDetailsModal = (post, editable) => {
+    this.setState({postDetailsModalOpened: true, selectedPost: post, editable: editable});
+  };
+
   closePostDetailsModal = () => {
+    const { history, filteredBy } = this.props;
     this.setState({postDetailsModalOpened: false});
-  }
+    history.push(`/${filteredBy}`);
+  };
 
   onDeleteHandler = (postId) => {
     const {deletePost} = this.props;
@@ -36,12 +50,11 @@ class Posts extends Component {
 
   closeNewPostModal = () => {
     this.setState({newPostModalOpened: false});
-
-  }
+  };
 
   onSavedHandler = () => {
     this.closeNewPostModal();
-  }
+  };
 
   render() {
     const {posts, categories} = this.props;
@@ -67,12 +80,12 @@ class Posts extends Component {
           <div className='postsNoResultsFound'>No results found.</div>
         }
 
-        <Route path="/" render={ ({history}) => (
+        <Route exact path="/:category/:postId" render={(props) => (
           <Modal
             className='postDetailsModal'
             overlayClassName='postDetailsOverlay'
             isOpen={postDetailsModalOpened}
-            onRequestClose={() => {history.goBack(); this.closePostDetailsModal()}}
+            onRequestClose={() => {this.closePostDetailsModal()}}
             contentLabel='Post details'>
             <div>
               <PostDetailsView post={selectedPost} editable={editable}/>
@@ -96,7 +109,8 @@ class Posts extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  posts: state.posts ? state.posts: []
+  posts: state.posts,
+  filteredBy: state.filteredBy
 });
 
 const mapDispatchToProps = dispatch => ({

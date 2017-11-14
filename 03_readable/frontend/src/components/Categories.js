@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { filterPostsBy} from '../actions';
@@ -7,35 +6,47 @@ import MdClear from 'react-icons/lib/md/clear';
 import './css/Categories.css';
 
 class Categories extends Component {
-  render() {
-    const {categories, filteredBy, filterPostsBy} = this.props;
+  state = {
+    bookmarked: undefined
+  };
 
+  componentWillReceiveProps(props) {
+    const {category } = props.match.params;
+
+    // Filter posts by category when navigating by url
+    if (this.state.bookmarked === undefined && category) {
+        this.setState({bookmarked: true});
+        props.filterPostsBy(category);
+    } else {
+        this.setState({bookmarked: false});
+    }
+  }
+
+  render() {
     return (
-      <Switch>
-        <Route exact path="/" render={ () => (
+        this.props.filteredBy === ''
+        ?
           <div className='categoriesContainer'>
             <h3 className='categoriesHeader'>Categories</h3>
             <ul className='categoryNames'>
-              { categories.map((category) => (
+              { this.props.categories.map((category) => (
                   <li className='categoryName' key={category.path}>
-                    <Link className="categoryLink" to={`/${category.path}`} onClick={() => filterPostsBy(category.path)}> {category.name}</Link>
+                    <Link className="categoryLink" to={`/${category.path}`}
+                      onClick={() => this.props.filterPostsBy(category.path)}>{category.name}</Link>
                   </li>
               ))}
             </ul>
           </div>
-        )}/>
-        <Route exact path="/:category" render={() => (
+        :
           <div className='categoriesContainer'>
             <h3 className='categoriesHeader'>Filtered by</h3>
-            <span className='selectedCategoryName'>{filteredBy}</span>
-            <Link className="categoryLink" to="/" onClick={() => filterPostsBy('')}>
+            <span className='selectedCategoryName'>{this.props.match.params.category}</span>
+            <Link className="categoryLink" to="/" onClick={() => this.props.filterPostsBy('')}>
               <button className='categoriesClearButton' >
                 <MdClear className='categoriesClear'/>
               </button>
             </Link>
           </div>
-        )}/>
-      </Switch>
     );
   }
 }

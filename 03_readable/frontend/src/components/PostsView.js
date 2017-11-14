@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route} from 'react-router-dom';
 import Posts from './Posts';
 import Categories from './Categories';
 import SortPostsBy from './SortPostsBy';
@@ -10,9 +11,13 @@ class PostsView extends Component {
 
     return (
       <div className='postsViewContainer'>
-        <Categories categories={categories}/>
+        <Route path="/:category?/:postId?" render={(props) => (
+          <Categories {...props} categories={categories}/>
+        )}/>
         <SortPostsBy/>
-        <Posts categories={categories}/>
+        <Route path="/:category?/:postId?" render={(props) => (
+          <Posts {...props} categories={categories}/>
+        )}/>
       </div>
     );
   }

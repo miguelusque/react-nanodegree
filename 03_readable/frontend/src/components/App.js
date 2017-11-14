@@ -34,12 +34,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  filteredBy: state.filteredBy
-});
-
 const mapDispatchToProps = dispatch => ({
   loadPosts: posts => dispatch(loadPosts(posts))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
