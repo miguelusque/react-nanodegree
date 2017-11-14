@@ -35,9 +35,8 @@ class Posts extends Component {
   };
 
   closePostDetailsModal = () => {
-    const { history, filteredBy } = this.props;
     this.setState({postDetailsModalOpened: false});
-    history.push(`/${filteredBy}`);
+    this.props.history.push(`/${this.props.filteredBy}`);
   };
 
   onDeleteHandler = (postId) => {
@@ -71,6 +70,12 @@ class Posts extends Component {
                 <ActionsToolBar
                   key={post.id}
                   onEdit={() => this.openPostDetailsModal(post, true)}
+                  //   {
+                  //   this.props.filteredBy ?
+                  //     this.props.history.push(`/${this.props.filteredBy}/${post.id}`) :
+                  //     this.props.history.push(`/${post.id}`);
+                  //   this.openPostDetailsModal(post, true);
+                  // }}
                   onDelete={() => this.onDeleteHandler(post.id)}
                 />
                 <Post post={post} onPostClick={() => this.openPostDetailsModal(post, false)}/>
@@ -80,7 +85,7 @@ class Posts extends Component {
           <div className='postsNoResultsFound'>No results found.</div>
         }
 
-        <Route exact path="/:category/:postId" render={(props) => (
+        <Route path="/:category?/:postId?" render={(props) => (
           <Modal
             className='postDetailsModal'
             overlayClassName='postDetailsOverlay'
