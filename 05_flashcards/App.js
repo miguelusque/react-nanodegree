@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Platform, StatusBar as NativeStatusBar} from 'react-native';
+import {View, Platform, StatusBar as NativeStatusBar, AsyncStorage} from 'react-native';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
@@ -72,6 +72,10 @@ const MainNavigator = StackNavigator({
 });
 
 export default class App extends React.Component {
+  componentDidMount () {
+    // TODO: To be deleted.
+    // AsyncStorage.clear();
+  }
   render() {
     return (
       <Provider store={createStore(reducer)}>

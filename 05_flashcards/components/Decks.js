@@ -27,32 +27,33 @@ class Decks extends React.Component {
   }
 
   render() {
-    // const {decks} = this.props;
+    const {decks} = this.props;
 
-    let decks = {
-      React: {
-        title: 'React',
-        questions: [
-          {
-            question: 'What is React?',
-            answer: 'A library for managing user interfaces'
-          },
-          {
-            question: 'Where do you make Ajax requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          }
-        ]
-      },
-      JavaScript: {
-        title: 'JavaScript',
-        questions: [
-          {
-            question: 'What is a closure?',
-            answer: 'The combination of a function and the lexical environment within which that function was declared.'
-          }
-        ]
-      }
-    };
+    // TODO: Eliminar
+    // let decks = {
+    //   React: {
+    //     title: 'React',
+    //     questions: [
+    //       {
+    //         question: 'What is React?',
+    //         answer: 'A library for managing user interfaces'
+    //       },
+    //       {
+    //         question: 'Where do you make Ajax requests in React?',
+    //         answer: 'The componentDidMount lifecycle event'
+    //       }
+    //     ]
+    //   },
+    //   JavaScript: {
+    //     title: 'JavaScript',
+    //     questions: [
+    //       {
+    //         question: 'What is a closure?',
+    //         answer: 'The combination of a function and the lexical environment within which that function was declared.'
+    //       }
+    //     ]
+    //   }
+    // };
 
     const {isDataLoaded} = this.state;
 
@@ -82,7 +83,8 @@ class Decks extends React.Component {
                 {decks[deck].title}
               </Text>
               <Text style={{fontSize: 16, textAlign: 'center', color: gray}}>
-                {0} cards
+                {decks[deck].questions.length} card
+                {decks[deck].questions.length === 1 ? '' : 's'}
               </Text>
             </TouchableOpacity>
           </View>

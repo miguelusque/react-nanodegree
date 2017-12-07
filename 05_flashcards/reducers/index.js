@@ -6,7 +6,7 @@ const decks = (state = initialState, action) => {
   switch (action.type) {
   case ACTIONS.LOAD_DECKS:
     // TODO: Retrieve decks from AsyncStorace
-    return {...state};
+    return action.decks === null ? {} : action.decks;
   case ACTIONS.ADD_DECK:
     return {...state, ...action.deck};
   default:
