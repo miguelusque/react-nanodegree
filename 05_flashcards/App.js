@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import {Constants} from 'expo';
 import {FontAwesome, MaterialIcons} from '@expo/vector-icons';
-import {purple, white} from './utils/colors';
+import {black, white} from './utils/colors';
 import AddDeck from './components/AddDeck';
 import DeckDetails from './components/DeckDetails';
 import Decks from './components/Decks';
@@ -46,10 +46,10 @@ const Tabs = TabNavigator({
     header: null
   },
   tabBarOptions: {
-    activeTintColor: Platform.OS === 'ios' ? purple : white,
+    activeTintColor: Platform.OS === 'ios' ? black : white,
     style: {
       height: 56,
-      backgroundColor: Platform.OS === 'ios' ? white : purple,
+      backgroundColor: Platform.OS === 'ios' ? white : black,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {width: 0, height: 3},
       shadowRadius: 6,
@@ -66,7 +66,7 @@ const MainNavigator = StackNavigator({
     screen: DeckDetails,
     navigationOptions: {
       headerTintColor: white,
-      headerStyle: {backgroundColor: purple}
+      headerStyle: {backgroundColor: black}
     }
   }
 });
@@ -80,7 +80,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-          <StatusBar backgroundColor={purple} barStyle='light-content'/>
+          <StatusBar backgroundColor={black} barStyle='light-content'/>
           <MainNavigator/>
         </View>
       </Provider>
