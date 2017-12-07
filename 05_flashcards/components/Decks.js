@@ -7,11 +7,11 @@ import {loadDecks} from '../actions';
 import {fetchDecks} from '../utils/api';
 import {white, gray} from '../utils/colors';
 
-
 class Decks extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    decks: PropTypes.object.isRequired
+    decks: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired
   };
 
   state = {
@@ -29,7 +29,7 @@ class Decks extends React.Component {
   render() {
     const {decks} = this.props;
 
-    // TODO: Eliminar
+    // TODO: To be deleted
     // let decks = {
     //   React: {
     //     title: 'React',
@@ -55,10 +55,8 @@ class Decks extends React.Component {
     //   }
     // };
 
-    const {isDataLoaded} = this.state;
-
     // Display AppLoading while the data is being loaded
-    if (isDataLoaded === false) {
+    if (this.state.isDataLoaded === false) {
       return <AppLoading/>;
     }
 
@@ -76,9 +74,9 @@ class Decks extends React.Component {
     return (
       <View style={{flex:1}}>
         {Object.keys(decks).map((deck) => (
-          // <Text key={deck}>{JSON.stringify(decks[deck].title)}</Text>
           <View style={styles.item} key={deck}>
-            <TouchableOpacity onPress={() => console.log(deck)}>
+            <TouchableOpacity onPress={() =>
+              this.props.navigation.navigate('DeckDetails', {deck: decks[deck]})}>
               <Text style={{fontSize: 20, textAlign: 'center'}}>
                 {decks[deck].title}
               </Text>
