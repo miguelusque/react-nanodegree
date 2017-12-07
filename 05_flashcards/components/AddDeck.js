@@ -73,14 +73,13 @@ class AddDeck extends React.Component {
           value={this.state.deckTitle}
           onChangeText={this.validateInput}/>
         <View style={{alignItems: 'center'}}>
-        {this.state.displayErrorMessage &&
-        <Text style={{color:red, marginTop: 15}}>
-          Deck title cannot be empty
-        </Text>
-        }
-          <TextButton
-            style={{borderColor: black, backgroundColor: black, color:white}}
-            onPress={this.submit}>
+          {this.state.displayErrorMessage &&
+          <Text style={{color:red, marginTop: 15}}>
+            Deck title cannot be empty
+          </Text>
+          }
+          <TextButton style={{borderColor: black, backgroundColor: black}}
+            color={'white'} onPress={this.submit}>
             SUBMIT
           </TextButton>
         </View>
@@ -108,11 +107,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowColor: 'rgba(0, 0, 0, 0.24)',
     shadowOffset: {width: 0, height: 3}
-  },
-  submit: {
-    borderColor: black,
-    backgroundColor: black,
-    color: white
   }
 });
 
