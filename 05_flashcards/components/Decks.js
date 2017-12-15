@@ -3,8 +3,8 @@ import {Text, View, TouchableOpacity, StyleSheet, Platform} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {AppLoading} from 'expo';
-import {loadDecks} from '../actions';
-import {fetchDecks} from '../utils/api';
+import {setDecks as setDecksToStore} from '../actions';
+import {fetchDecks as fetchDecksFromStorage} from '../utils/api';
 import {white, gray} from '../utils/colors';
 
 class Decks extends React.Component {
@@ -19,10 +19,8 @@ class Decks extends React.Component {
   };
 
   componentDidMount() {
-    const {dispatch} = this.props;
-
-    fetchDecks()
-      .then((decks) => dispatch(loadDecks(decks)))
+    fetchDecksFromStorage()
+      .then((decks) => this.props.dispatch(setDecksToStore(decks)))
       .then(() => this.setState({isDataLoaded: true}));
   }
 

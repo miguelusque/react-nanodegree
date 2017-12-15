@@ -74,7 +74,7 @@ const MainNavigator = StackNavigator({
 export default class App extends React.Component {
   componentDidMount () {
     // TODO: To be deleted.
-    // AsyncStorage.clear();
+    AsyncStorage.clear();
   }
   render() {
     return (

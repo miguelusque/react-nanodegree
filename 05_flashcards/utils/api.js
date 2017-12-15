@@ -7,6 +7,6 @@ export const fetchDecks = () => (
     .then((decks) => JSON.parse(decks))
 );
 
-export const submitDeck = (deck) => (
+export const addDeck = (deck) => (
   AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(deck)
 ));

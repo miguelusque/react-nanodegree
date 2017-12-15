@@ -6,8 +6,8 @@ import {connect} from 'react-redux';
 import {NavigationActions} from 'react-navigation';
 import TextButton from './TextButton';
 import {addDeck} from '../actions';
-import {submitDeck} from '../utils/api';
-import {black, white, red} from '../utils/colors';
+import {addDeck as addDeckToStorage} from '../utils/api';
+import {black, red} from '../utils/colors';
 
 class AddDeck extends React.Component {
   state = {
@@ -28,7 +28,6 @@ class AddDeck extends React.Component {
       return;
     }
 
-
     const deck = {
       [deckTitle]: {
         title: deckTitle,
@@ -36,7 +35,9 @@ class AddDeck extends React.Component {
       }
     };
 
-    this.props.dispatch(addDeck(deck));
+    // Add deck into AsyncStorage and then update store
+    addDeckToStorage(deck)
+      .then(() => this.props.dispatch(addDeck(deck)));
 
     this.setState(() => ({
       deckTitle: ''
@@ -44,7 +45,6 @@ class AddDeck extends React.Component {
 
     this.toHome();
 
-    submitDeck(deck);
 
     //TODO: TBD
     // clearLocalNotification()
@@ -56,7 +56,7 @@ class AddDeck extends React.Component {
   };
 
   validateInput = (deckTitle) => {
-    deckTitle = deckTitle.replace(/[^\w\s]/gi, '');
+    deckTitle = deckTitle.replace(/[^\w\s\?\!]/gi, '');
     this.setState({
       deckTitle: deckTitle,
       displayErrorMessage: false
