@@ -16,20 +16,20 @@ class AddCard extends React.Component {
   state = {
     question: '',
     answer: '',
-    displayQuestionErrorMessage: false,
-    displayAnswerErrorMessage: false
+    displayNoQuestionMessage: false,
+    displayNoAnswerMessage: false
   }
 
   submit = () => {
     const question = this.state.question.trim();
     if (question.length == 0) {
-      this.setState({displayQuestionErrorMessage: true});
+      this.setState({displayNoQuestionMessage: true});
       return;
     }
 
     const answer = this.state.answer.trim();
     if (answer.length == 0) {
-      this.setState({displayAnswerErrorMessage: true});
+      this.setState({displayNoAnswerMessage: true});
       return;
     }
 
@@ -43,14 +43,14 @@ class AddCard extends React.Component {
   validateQuestion = (question) => {
     this.setState({
       question: question,
-      displayQuestionErrorMessage: false
+      displayNoQuestionMessage: false
     });
   };
 
   validateAnswer = (answer) => {
     this.setState({
       answer: answer,
-      displayAnswerErrorMessage: false
+      displayNoAnswerMessage: false
     });
   };
 
@@ -61,7 +61,7 @@ class AddCard extends React.Component {
           placeholder='Please enter a question'
           value={this.state.question}
           onChangeText={this.validateQuestion}/>
-        {this.state.displayQuestionErrorMessage &&
+        {this.state.displayNoQuestionMessage &&
           <Text style={styles.errorMessage}>
             This field cannot be empty.{'\n'}Please enter a question
           </Text>
@@ -70,7 +70,7 @@ class AddCard extends React.Component {
           placeholder='Please enter the answer'
           value={this.state.answer}
           onChangeText={this.validateAnswer}/>
-        {this.state.displayAnswerErrorMessage &&
+        {this.state.displayNoAnswerMessage &&
           <Text style={styles.errorMessage}>
             This field cannot be empty.{'\n'}Please enter the answer
           </Text>
