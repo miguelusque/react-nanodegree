@@ -33,10 +33,11 @@ class AddDeck extends React.Component {
       }
     };
 
-    // Add deck to store, clear input box and navigate back
+    // Add deck to store, clear input box and navigate to the deck details
     Promise.resolve(this.props.dispatch(addDeck(deck)))
       .then(() => this.setState({deckTitle: ''}))
-      .then(() => this.props.navigation.goBack());
+      .then(() => this.props.navigation.navigate('DeckDetails',
+        {deckTitle: deckTitle}));
   };
 
   validateInput = (deckTitle) => {
