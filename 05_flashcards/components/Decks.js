@@ -35,10 +35,10 @@ class Decks extends React.Component {
     // Display a message when no decks have been added yet
     if (Object.keys(decks).length === 0 && decks.constructor === Object) {
       return (
-        <View style={styles.item}>
-        <Text style={styles.noDataText}>You didn‘t add any deck yet.</Text>
-        <Text>Press ‘New Deck’ to create your first deck.</Text>
-      </View>
+        <View style={[styles.item, {alignItems:'center'}]}>
+          <Text style={styles.noDataText}>You didn‘t add any deck yet.</Text>
+          <Text>Press ‘New Deck’ to create your first deck.</Text>
+        </View>
       );
     }
 
