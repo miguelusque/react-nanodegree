@@ -16,13 +16,13 @@ class AddDeck extends React.Component {
 
   state = {
     deckTitle: '',
-    displayErrorMessage: false
+    displayNoTitleMessage: false
   }
 
   submit = () => {
     const deckTitle = this.state.deckTitle.trim();
     if (deckTitle.length == 0) {
-      this.setState({displayErrorMessage: true});
+      this.setState({displayNoTitleMessage: true});
       return;
     }
 
@@ -47,7 +47,7 @@ class AddDeck extends React.Component {
     deckTitle = deckTitle.replace(/[^\w\s\?\!]/gi, '');
     this.setState({
       deckTitle: deckTitle,
-      displayErrorMessage: false
+      displayNoTitleMessage: false
     });
   };
 
@@ -59,7 +59,7 @@ class AddDeck extends React.Component {
           placeholder='Deck Title'
           value={this.state.deckTitle}
           onChangeText={this.validateInput}/>
-        {this.state.displayErrorMessage &&
+        {this.state.displayNoTitleMessage &&
           <Text style={styles.errorMessage}>
             Deck title cannot be empty
           </Text>
