@@ -1,39 +1,44 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
+import {StackNavigator} from 'react-navigation';
 import PropTypes from 'prop-types';
+import AddCard from './AddCard';
 import TextButton from './TextButton';
 import {gray, black, white} from '../utils/colors';
 
-export default class DeckDetails extends React.Component {
+class DeckDetails extends React.Component {
   static propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    decks: PropTypes.object.isRequired
   }
 
   static navigationOptions = ({navigation}) => {
     return {
-      title: navigation.state.params.deck.title
+      title: navigation.state.params.deckTitle
     };
   }
 
-  addCard = () => (
-    true
-  );
+  addCard = (deckTitle) => {
+    this.props.navigation.navigate('AddCard', {deckTitle: deckTitle});
+  };
 
   submit = () => (
     true
   );
   render() {
-    const {deck} = this.props.navigation.state.params;
+    const {deckTitle} = this.props.navigation.state.params;
+    const {decks} = this.props;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>{deck.title}</Text>
+        <Text style={styles.header}>{deckTitle}</Text>
         <Text style={styles.details}>
-          {deck.questions.length} card
-          {deck.questions.length === 1 ? '' : 's'}
+          {decks[deckTitle].questions.length} card
+          {decks[deckTitle].questions.length === 1 ? '' : 's'}
         </Text>
-
         <TextButton style={{borderColor: black, backgroundColor: white}}
-          color={black} onPress={this.addCard}>
+          color={black} onPress={() => this.addCard(deckTitle)}>
             Add Card
         </TextButton>
 
@@ -66,3 +71,19 @@ const styles = StyleSheet.create({
     color: gray
   }
 });
+
+const mapStateToProps = (state) => ({decks: state});
+
+const DeckDetailsNavigator = StackNavigator({
+  Home: {
+    screen: connect(mapStateToProps)(DeckDetails),
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTitle: 'Add card'
+    }
+  }
+}, {headerMode: 'none'});
+
+export default DeckDetailsNavigator;
