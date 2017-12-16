@@ -4,13 +4,18 @@ import {connect} from 'react-redux';
 import {StackNavigator} from 'react-navigation';
 import PropTypes from 'prop-types';
 import AddCard from './AddCard';
+import Quiz from './Quiz';
 import TextButton from './TextButton';
-import {gray, black, white} from '../utils/colors';
+import {gray, black, white, red} from '../utils/colors';
 
 class DeckDetails extends React.Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     decks: PropTypes.object.isRequired
+  }
+
+  state = {
+    displayEmptyDeckMessage: false
   }
 
   static navigationOptions = ({navigation}) => {
@@ -20,12 +25,18 @@ class DeckDetails extends React.Component {
   }
 
   addCard = (deckTitle) => {
+    this.setState({displayEmptyDeckMessage: false});
     this.props.navigation.navigate('AddCard', {deckTitle: deckTitle});
   };
 
-  submit = () => (
-    true
-  );
+  startQuiz = (deckTitle) => {
+    if (this.props.decks[deckTitle].questions.length === 0) {
+      this.setState({displayEmptyDeckMessage: true});
+    } else {
+      this.props.navigation.navigate('Quiz', {deckTitle: deckTitle});
+    }
+  };
+
   render() {
     const {deckTitle} = this.props.navigation.state.params;
     const {decks} = this.props;
@@ -41,11 +52,13 @@ class DeckDetails extends React.Component {
           color={black} onPress={() => this.addCard(deckTitle)}>
             Add Card
         </TextButton>
-
         <TextButton style={{borderColor: black, backgroundColor: black}}
-          color={white} onPress={this.submit}>
+          color={white} onPress={() => this.startQuiz(deckTitle)}>
             Start Quiz
         </TextButton>
+        {this.state.displayEmptyDeckMessage &&
+          <Text style={styles.errorMessage}>Deck is empty!</Text>
+        }
       </View>
     );
   }
@@ -69,6 +82,11 @@ const styles = StyleSheet.create({
     marginBottom: 100,
     textAlign: 'center',
     color: gray
+  },
+  errorMessage: {
+    textAlign: 'center',
+    color: red,
+    marginTop: 15
   }
 });
 
@@ -83,7 +101,14 @@ const DeckDetailsNavigator = StackNavigator({
     navigationOptions: {
       headerTitle: 'Add card'
     }
-  }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTitle: 'Quiz'
+    }
+  },
+
 }, {headerMode: 'none'});
 
 export default DeckDetailsNavigator;
