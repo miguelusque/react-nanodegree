@@ -3,26 +3,24 @@ import {Text, TextInput, View, KeyboardAvoidingView,  StyleSheet,
   Platform} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {NavigationActions} from 'react-navigation';
 import TextButton from './TextButton';
 import {addDeck} from '../actions';
-import {addDeck as addDeckToStorage} from '../utils/api';
 import {black, red} from '../utils/colors';
 
 class AddDeck extends React.Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    decks: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired
+  };
+
   state = {
     deckTitle: '',
     displayErrorMessage: false
   }
 
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    navigation: PropTypes.object.isRequired
-  };
-
   submit = () => {
     const deckTitle = this.state.deckTitle.trim();
-
     if (deckTitle.length == 0) {
       this.setState({displayErrorMessage: true});
       return;
@@ -35,24 +33,14 @@ class AddDeck extends React.Component {
       }
     };
 
-    // Add deck into AsyncStorage and then update store
-    addDeckToStorage(deck)
-      .then(() => this.props.dispatch(addDeck(deck)));
+    // Add deck to store, clear input box and navigate back
+    Promise.resolve(this.props.dispatch(addDeck(deck)))
+      .then(() => this.setState({deckTitle: ''}))
+      .then(() => this.props.navigation.goBack());
 
-    this.setState(() => ({
-      deckTitle: ''
-    }));
-
-    this.toHome();
-
-
-    //TODO: TBD
+      //TODO: TBD
     // clearLocalNotification()
     //   .then(setLocalNotification);
-  };
-
-  toHome = () => {
-    this.props.navigation.dispatch(NavigationActions.back({key: 'AddDeck'}));
   };
 
   validateInput = (deckTitle) => {
@@ -65,19 +53,19 @@ class AddDeck extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container}
-        behavior="padding">
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={styles.header}>What is the title of your new deck?</Text>
         <TextInput style={styles.input}
           placeholder='Deck Title'
           value={this.state.deckTitle}
           onChangeText={this.validateInput}/>
-        <View style={{alignItems: 'center'}}>
-          {this.state.displayErrorMessage &&
-          <Text style={{color:red, marginTop: 15}}>
+        {this.state.displayErrorMessage &&
+          <Text style={styles.errorMessage}>
             Deck title cannot be empty
           </Text>
-          }
+        }
+
+        <View style={{alignItems: 'center'}}>
           <TextButton style={{borderColor: black, backgroundColor: black}}
             color={'white'} onPress={this.submit}>
             SUBMIT
@@ -87,6 +75,7 @@ class AddDeck extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -107,7 +96,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowColor: 'rgba(0, 0, 0, 0.24)',
     shadowOffset: {width: 0, height: 3}
+  },
+  errorMessage: {
+    textAlign: 'center',
+    color: red,
+    marginTop: 15
   }
 });
 
-export default connect()(AddDeck);
+const mapStateToProps = (state) => ({decks: state});
+
+export default connect(mapStateToProps)(AddDeck);
