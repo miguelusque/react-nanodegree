@@ -3,7 +3,7 @@ import {Text, View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import TextButton from './TextButton';
-import {red, green, white} from '../utils/colors';
+import {red, green, white, black} from '../utils/colors';
 import {clearLocalNotification, setLocalNotification} from '../utils/helpers';
 
 class Quiz extends React.Component {
@@ -25,6 +25,15 @@ class Quiz extends React.Component {
       currentQuestion:
         Math.min(this.state.currentQuestion + 1, deck.questions.length),
       flipCard: false
+    });
+  }
+
+  restartQuiz = () => {
+    this.setState({
+      correctAnswers: 0,
+      currentQuestion: 0,
+      flipCard: false
+
     });
   }
 
@@ -75,6 +84,17 @@ class Quiz extends React.Component {
         <Text style={{textAlign: 'center', paddingTop: 5}}>
           {this.state.correctAnswers} of {deck.questions.length} passed!
         </Text>
+        <View style={{alignItems: 'center', paddingTop:30}}>
+          <TextButton style={{borderColor: white, backgroundColor: white}}
+            color={black} onPress={() => this.restartQuiz()}>
+              Restart Quiz
+          </TextButton>
+          <TextButton style={{borderColor: black, backgroundColor: black}}
+            color={white} onPress={() => this.props.navigation.goBack()}>
+              Back to Deck
+          </TextButton>
+        </View>
+
       </View>
     );
   }
@@ -92,6 +112,9 @@ const styles = StyleSheet.create({
   answer: {
     paddingBottom: 15,
     textAlign: 'center'
+  },
+  scoreButtons: {
+    justifyContent: 'space-around',
   }
 });
 
