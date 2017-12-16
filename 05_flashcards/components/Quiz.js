@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import TextButton from './TextButton';
 import {red, green, white} from '../utils/colors';
-
-
+import {clearLocalNotification, setLocalNotification} from '../utils/helpers';
 
 class Quiz extends React.Component {
   static propTypes = {
@@ -67,6 +66,8 @@ class Quiz extends React.Component {
       );
     }
 
+    // Reset reminder for tomorrow
+    clearLocalNotification().then(setLocalNotification);
     // Display results
     return (
       <View style={[styles.container, {paddingTop: 25}]}>
