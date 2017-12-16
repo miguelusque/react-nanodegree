@@ -37,10 +37,6 @@ class AddDeck extends React.Component {
     Promise.resolve(this.props.dispatch(addDeck(deck)))
       .then(() => this.setState({deckTitle: ''}))
       .then(() => this.props.navigation.goBack());
-
-      //TODO: TBD
-    // clearLocalNotification()
-    //   .then(setLocalNotification);
   };
 
   validateInput = (deckTitle) => {
