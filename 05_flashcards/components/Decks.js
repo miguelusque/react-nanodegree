@@ -27,32 +27,6 @@ class Decks extends React.Component {
   render() {
     const {decks} = this.props;
 
-    // TODO: To be deleted
-    // let decks = {
-    //   React: {
-    //     title: 'React',
-    //     questions: [
-    //       {
-    //         question: 'What is React?',
-    //         answer: 'A library for managing user interfaces'
-    //       },
-    //       {
-    //         question: 'Where do you make Ajax requests in React?',
-    //         answer: 'The componentDidMount lifecycle event'
-    //       }
-    //     ]
-    //   },
-    //   JavaScript: {
-    //     title: 'JavaScript',
-    //     questions: [
-    //       {
-    //         question: 'What is a closure?',
-    //         answer: 'The combination of a function and the lexical environment within which that function was declared.'
-    //       }
-    //     ]
-    //   }
-    // };
-
     // Display AppLoading while the data is being loaded
     if (this.state.isDataLoaded === false) {
       return <AppLoading/>;
@@ -74,7 +48,7 @@ class Decks extends React.Component {
         {Object.keys(decks).map((deck) => (
           <View style={styles.item} key={deck}>
             <TouchableOpacity onPress={() =>
-              this.props.navigation.navigate('DeckDetails', {deck: decks[deck]})}>
+              this.props.navigation.navigate('DeckDetails', {deckTitle: decks[deck].title})}>
               <Text style={{fontSize: 20, textAlign: 'center'}}>
                 {decks[deck].title}
               </Text>
