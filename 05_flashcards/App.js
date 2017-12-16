@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Platform, StatusBar as NativeStatusBar, AsyncStorage} from 'react-native';
+import {View, Platform, StatusBar as NativeStatusBar} from 'react-native';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
@@ -11,6 +11,7 @@ import AddDeck from './components/AddDeck';
 import DeckDetails from './components/DeckDetails';
 import Decks from './components/Decks';
 import reducer from './reducers';
+import {setLocalNotification} from './utils/helpers';
 
 const StatusBar = ({backgroundColor, ... props}) => (
   <View style={{backgroundColor, height: Constants.statusBarHeight}}>
@@ -73,9 +74,9 @@ const MainNavigator = StackNavigator({
 
 export default class App extends React.Component {
   componentDidMount () {
-    // TODO: To be deleted.
-    AsyncStorage.clear();
+    setLocalNotification();
   }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>
