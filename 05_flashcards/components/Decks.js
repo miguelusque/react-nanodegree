@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, StyleSheet, Platform} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity, StyleSheet,
+  Platform} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {AppLoading} from 'expo';
@@ -44,7 +45,7 @@ class Decks extends React.Component {
 
     // Display the decks
     return (
-      <View style={{flex:1}}>
+      <ScrollView style={{flex:1}}>
         {Object.keys(decks).map((deck) => (
           <View style={styles.item} key={deck}>
             <TouchableOpacity onPress={() =>
@@ -59,7 +60,7 @@ class Decks extends React.Component {
             </TouchableOpacity>
           </View>
         ))}
-      </View>
+      </ScrollView>
     );
   }
 }
