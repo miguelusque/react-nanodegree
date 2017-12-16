@@ -7,7 +7,6 @@ import AddCard from './AddCard';
 import Quiz from './Quiz';
 import TextButton from './TextButton';
 import {gray, black, white, red} from '../utils/colors';
-import {clearLocalNotification, setLocalNotification} from '../utils/helpers';
 
 class DeckDetails extends React.Component {
   static propTypes = {
@@ -34,8 +33,6 @@ class DeckDetails extends React.Component {
     if (this.props.decks[deckTitle].questions.length === 0) {
       this.setState({displayEmptyDeckMessage: true});
     } else {
-      clearLocalNotification()
-        .then(setLocalNotification);
       this.props.navigation.navigate('Quiz', {deckTitle: deckTitle});
     }
   };
