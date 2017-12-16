@@ -58,7 +58,7 @@ class Quiz extends React.Component {
                   Correct
               </TextButton>
               <TextButton style={{borderColor: red, backgroundColor: red}}
-                color={white} onPress={() => this.updateScore(-1)}>
+                color={white} onPress={() => this.updateScore(0)}>
                 Incorrect
               </TextButton>
             </View>
@@ -70,12 +70,10 @@ class Quiz extends React.Component {
     // Display results
     return (
       <View style={[styles.container, {paddingTop: 25}]}>
-        <View style={{textAlign: 'center'}}>
-          <Text style={styles.header}>Score</Text>
-          <Text style={{textAlign: 'center', paddingTop: 5}}>
-            {this.state.correctAnswers} of {deck.questions.length} passed!
-          </Text>
-        </View>
+        <Text style={styles.header}>Score</Text>
+        <Text style={{textAlign: 'center', paddingTop: 5}}>
+          {this.state.correctAnswers} of {deck.questions.length} passed!
+        </Text>
       </View>
     );
   }
