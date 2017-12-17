@@ -9,9 +9,9 @@ import {black, red} from '../utils/colors';
 
 class AddDeck extends React.Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
     decks: PropTypes.object.isRequired,
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    addDeck: PropTypes.func.isRequired
   };
 
   state = {
@@ -34,7 +34,7 @@ class AddDeck extends React.Component {
     };
 
     // Add deck to store, clear input box and navigate to the deck details
-    Promise.resolve(this.props.dispatch(addDeck(deck)))
+    Promise.resolve(this.props.addDeck(deck))
       .then(() => this.setState({deckTitle: ''}))
       .then(() => this.props.navigation.navigate('DeckDetails',
         {deckTitle: deckTitle}));
@@ -101,6 +101,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => ({decks: state});
+const mapStateToProps = (decks) => ({ decks });
 
-export default connect(mapStateToProps)(AddDeck);
+export default connect(mapStateToProps, {addDeck})(AddDeck);

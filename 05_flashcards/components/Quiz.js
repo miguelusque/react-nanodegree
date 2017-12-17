@@ -118,6 +118,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => ({decks: state});
+const mapStateToProps = (decks) => ({ decks });
 
 export default connect(mapStateToProps)(Quiz);

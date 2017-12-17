@@ -4,13 +4,13 @@ import {Text, View, ScrollView, TouchableOpacity, StyleSheet,
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {AppLoading} from 'expo';
-import {setDecks as setDecksToStore} from '../actions';
-import {fetchDecks as fetchDecksFromStorage} from '../utils/api';
+import {setDecks} from '../actions';
+import {fetchDecks} from '../utils/api';
 import {white, gray} from '../utils/colors';
 
 class Decks extends React.Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    setDecks: PropTypes.func.isRequired,
     decks: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired
   };
@@ -20,10 +20,14 @@ class Decks extends React.Component {
   };
 
   componentDidMount() {
-    fetchDecksFromStorage()
-      .then((decks) => this.props.dispatch(setDecksToStore(decks)))
+    fetchDecks()
+      .then((decks) => this.props.setDecks(decks))
       .then(() => this.setState({isDataLoaded: true}));
   }
+
+  openDeckDetails = (deckTitle) => {
+    this.props.navigation.navigate('DeckDetails', {deckTitle: deckTitle});
+  };
 
   render() {
     const {decks} = this.props;
@@ -49,7 +53,7 @@ class Decks extends React.Component {
         {Object.keys(decks).map((deck) => (
           <View style={styles.item} key={deck}>
             <TouchableOpacity onPress={() =>
-              this.props.navigation.navigate('DeckDetails', {deckTitle: decks[deck].title})}>
+              this.openDeckDetails(decks[deck].title)}>
               <Text style={{fontSize: 20, textAlign: 'center'}}>
                 {decks[deck].title}
               </Text>
@@ -86,6 +90,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => ({decks: state});
+const mapStateToProps = (decks) => ({ decks });
 
-export default connect(mapStateToProps)(Decks);
+export default connect(mapStateToProps, {setDecks})(Decks);

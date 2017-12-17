@@ -10,7 +10,7 @@ import {black, red} from '../utils/colors';
 class AddCard extends React.Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    addCard: PropTypes.func.isRequired,
   }
 
   state = {
@@ -36,7 +36,7 @@ class AddCard extends React.Component {
     // Add card to store and navigate back
     const deckTitle = this.props.navigation.state.params.deckTitle;
     const card = {question: question, answer: answer};
-    Promise.resolve(this.props.dispatch(addCard(deckTitle, card)))
+    Promise.resolve(this.props.addCard(deckTitle, card))
       .then(() => this.props.navigation.goBack());
   }
 
@@ -113,6 +113,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => ({decks: state});
+const mapStateToProps = (decks) => ({ decks });
 
-export default connect(mapStateToProps)(AddCard);
+export default connect(mapStateToProps, {addCard})(AddCard);
