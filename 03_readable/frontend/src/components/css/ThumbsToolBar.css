@@ -1,0 +1,20 @@
+.thumbsToolBar {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+}
+
+.thumbButton {
+  font-size: 16px;
+  margin-right: 5px;
+  cursor: pointer;
+  color:lightgrey;
+}
+
+.thumbButton:hover {
+  color: grey;
+}

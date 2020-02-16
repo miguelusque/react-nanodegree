@@ -1,0 +1,51 @@
+.categoriesContainer {
+  margin-left: 15px;
+}
+
+.categoriesHeader {
+  font-size: 26px;
+  margin: 0px;
+}
+
+.categoryNames {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+.categoryName,
+.selectedCategoryName {
+  font-size: 18px;
+  margin: 8px 0px 15px 15px;
+  float: left;
+  cursor: pointer;
+  border-bottom:1px solid;
+}
+
+.selectedCategoryName {
+  font-style: oblique;
+  cursor: default;
+}
+
+.categoriesClear {
+  font-size: 14px;
+  background-color: grey;
+  color: white;
+}
+
+.categoriesClearButton {
+  background: none;
+  border: none;
+  margin-left: 6px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.categoryLink {
+  text-decoration: none;
+}
+
+.categoryLink:visited {
+  text-decoration: none;
+  color: black;
+}
